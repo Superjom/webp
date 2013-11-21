@@ -1,0 +1,72 @@
+<form name="tacCreateForm" onsubmit="tac.create();return false;">
+<div class="main_table">
+	<table class="m_table" width="100%" border="0" cellspacing="0">
+		<thead>
+			<tr>
+				<th align="left"><img src="/images/sub_func.gif"
+					align="absmiddle" /> <span>创建策略</span></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+					<table bgcolor="#F0F8E2" width="100%" border="0" cellpadding="6"
+						cellspacing="1">
+						<tr>
+							<td width="25%"></td>
+							<td width="20%" align="right">名称</td>
+							<td width="20%" align="left">
+							<input name="name" id="name" type="text" class="formtext_b80" />
+							</td>
+							<td align="left" id="info_1" style="color: red"></td>
+						</tr>
+						<tr>
+							<td width="25%"></td>
+							<td width="20%" align="right">描述</td>
+							<td width="20%" align="left">
+							<textarea cols="50" rows="10" name="description" id="description"></textarea>
+							</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td width="25%"></td>
+							<td width="20%" align="right"><B>键-值</B></td>
+							<td width="20%" align="left"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td width="25%"></td>
+							<td width="20%" align="right"><input name="key_1" id="key_1" type="text" class="formtext_b80" /></td>
+							<td width="20%" align="left" colspan="2"><input name="value_1" id="value_1" type="text" class="formtext_b80" /></td>
+						</tr>
+						<tr>
+							<td width="25%"></td>
+							<td width="20%" align="right"><input name="key_2" id="key_2" type="text" class="formtext_b80" /></td>
+							<td width="20%" align="left" colspan="2"><input name="value_2" id="value_2" type="text" class="formtext_b80" /></td>
+						</tr>
+						<tr>
+							<td width="25%"></td>
+							<td width="20%" align="right"><input name="key_3" id="key_3" type="text" class="formtext_b80" /></td>
+							<td width="20%" align="left" colspan="2"><input name="value_3" id="value_3" type="text" class="formtext_b80" /></td>
+						</tr>
+						<tr>
+							<td width="25%"></td>
+							<td width="20%" align="right"><input name="key_4" id="key_4" type="text" class="formtext_b80" /></td>
+							<td width="20%" align="left" colspan="2"><input name="value_4" id="value_4" type="text" class="formtext_b80" /></td>
+						</tr>
+						<tr>
+							<td width="25%"></td>
+							<td width="20%" align="right"><input name="key_5" id="key_5" type="text" class="formtext_b80" /></td>
+							<td width="20%" align="left" colspan="2"><input name="value_5" id="value_5" type="text" class="formtext_b80" /></td>
+						</tr>
+					</table>
+					<div class="form_control">
+						<input name="submit1" type="submit" class="but_01" value="提交" />
+						<input name="submit2" type="button" onclick="tac.list()" class="but_01" value="返回" />
+					</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+</form>

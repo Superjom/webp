@@ -1,0 +1,34 @@
+<div class="main_table">
+	<table width="100%" border="0" cellspacing="0" class="m_table">
+		<thead>
+			<tr>
+				<th align="center" width="5%">编号</th>
+				<th align="center" width="20%">标题</th>
+				<th align="center" width="45%">内容</th>
+				<th align="center" width="10%">创建者</th>
+				<th align="center" width="10%">创建时间</th>
+				<th align="center" width="10%">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			#if($list.size()==0)
+				<tr><td align="center" colspan="11"><font color="red">没有符合条件的记录！</font></td></tr>
+			#end
+			#set($no=0)
+			#foreach($notice in $list )
+			#set($no=$no+1)
+			<tr>
+				<td width="5%" align="center">$no</td>
+				<td width="20%" align="center">$!notice.title</td>
+				<td width="45%" align="center">$!notice.content</td>
+				<td width="10%" align="center">$!notice.userName</td>
+				<td width="10%" align="center">$!notice.dt</td>
+				<td width="10%" align="center">
+				#if($purview.get("isAdmin") || $user_id==$notice.userId) <a href="#" onclick="notice.updateinit($notice.id)" style="text-decoration:none;color:blue">&nbsp;更新&nbsp;</a> #end
+				#if($purview.get("isAdmin") || $user_id==$notice.userId) <a href="#" onclick="notice.del($notice.id)" style="text-decoration:none;color:blue">&nbsp;删除&nbsp;</a> #end
+				</td>
+			</tr>
+			#end
+		</tbody>
+	</table>
+</div>

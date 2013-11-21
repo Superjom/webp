@@ -1,0 +1,38 @@
+<form name="garwzCreateForm" onsubmit="garwz.create();return false;">
+<div class="main_table">
+	<table class="m_table" width="100%" border="0" cellspacing="0">
+		<thead>
+			<tr>
+				<th align="left"><img src="/images/sub_func.gif"
+					align="absmiddle" /> <span>创建任务</span></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+					<table bgcolor="#F0F8E2" width="100%" border="0" cellpadding="6"
+						cellspacing="1">
+						<tr>
+							<td width="25%"></td>
+							<td width="20%" align="right">策略</td>
+							<td width="20%" align="left">
+							#if($tacs.size()==0)
+							<font color="red">当前无策略，请先创建策略！</font>
+							#end
+							#foreach($tac in $tacs )
+							<input type="radio" name="tac" value="$tac.id" type="text" />$!tac.name
+							#end
+							</td>
+							<td align="left" id="info_1" style="color: red"></td>
+						</tr>
+					</table>
+					<div class="form_control">
+						<input name="submit1" type="submit" class="but_01" value="提交" />
+						<input name="submit2" type="button" onclick="garwz.list()" class="but_01" value="返回" />
+					</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+</form>

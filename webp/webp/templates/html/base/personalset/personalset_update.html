@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<title>head</title>
+<link href="/css/css_bak.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/base/personalset.js"></script>
+</head>
+<body>
+<form action="/personalset?action=update" name="form1" action="" onsubmit="return personalset.update()" method="post">
+<div><img src="/images/position.gif" align="absmiddle" /> 当前位置：个人设置  </div>
+<div class="main_table">
+  <table class="m_table" width="100%" border="0" cellspacing="0">
+    <thead>
+      <tr>
+        <th align="left"> <img src="/images/sub_func.gif" align="absmiddle" /> <span>编辑个人信息</span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+        <table bgcolor="#F0F8E2" width="100%" border="0" cellpadding="6" cellspacing="1">
+          <tr>
+          	<td width="25%"></td>
+            <td width="20%" align="right">姓名</td>
+            <td width="20%" align="left"><input name="name" id="name" value="$!user.name" type="text" class="formtext_b80" /></td>
+            <td></td>
+          </tr>
+          <tr>
+          	<td width="25%"></td>
+            <td width="20%" align="right">账号</td>
+            <td width="20%" align="left">$!user.userId</td>
+            <td></td>
+          </tr>
+          <tr>
+          	<td width="25%"></td>
+            <td width="20%" align="right">性别</td>
+            <td width="20%" align="left">
+            <input type="radio" name="sex" value="1" type="text" #if($user.sex==1) checked #end />男
+            <input type="radio" name="sex" value="2" type="text" #if($user.sex==2) checked #end />女
+			</td>
+            <td></td>
+          </tr>
+          <tr>
+          	<td width="25%"></td>
+            <td width="20%" align="right">原密码</td>
+            <td width="20%" align="left"><input name="old_pwd" id="old_pwd" type="password" class="formtext_b80" /></td>
+            <td align="left" id="info_1" style="color:red"></td>
+          </tr>
+          <tr>
+          	<td width="25%"></td>
+            <td width="20%" align="right">新密码</td>
+            <td width="20%" align="left"><input name="new_pwd" id="new_pwd" type="password" class="formtext_b80" /></td>
+            <td align="left" id="info_2" style="color:red"></td>
+          </tr>
+          <tr>
+          	<td width="25%"></td>
+            <td width="20%" align="right">重复密码</td>
+            <td width="20%" align="left"><input name="new_pwd_1" id="new_pwd_1" type="password" class="formtext_b80" /></td>
+            <td align="left" id="info_3" style="color:red"></td>
+          </tr>
+          </table>
+          <div class="form_control">
+            <input name="submit3" type="submit" class="but_01" value="保存" />
+           <input name="submit2" type="reset" class="but_01" value="重置" />
+        </div></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</form>
+</body>
+</html>

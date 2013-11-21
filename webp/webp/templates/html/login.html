@@ -1,0 +1,88 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<title>超链基础平台-欢迎您的登录</title>
+<link href="/css/css_bak.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+body{
+	background-image:url("/images/login/login.jpg");
+	background-repeat:no-repeat;
+	background-position:center;
+}
+p{
+	font-size:12px;
+	color:#004998;
+}
+#login{
+	width:200px;
+	padding-top:360px; 
+	padding-left:620px;
+}
+a:link{
+	text-decoration: none;
+}
+</style>
+<script type="text/javascript">
+function checkForm(form){
+	if(form.userid.value==""){
+		alert("请输入账号");
+		form.userid.focus();
+		return;
+	}
+	if(form.password.value==""){
+		alert("请输入密码");
+		form.password.focus();
+		return;
+	}
+	if(form.rand.value==""){
+		alert("请输入验证码");
+		form.rand.focus();
+		return;
+	}
+	form.submit();
+}
+
+function intoLogin(form){
+	var intKeyCode = event.keyCode;
+	if(intKeyCode==13)
+		form.submit(); 
+}
+</script>
+</head>
+<body>
+<div id="login" align="center">
+<form name="form1" method="post" action="/login">
+<table>
+	<tr height="20%"></tr>
+	<tr height="20%">
+		<td width="50%"></td>
+		<td>
+		<p>账&nbsp;&nbsp;&nbsp;&nbsp;号：<input type="text" name="userid"
+			size="20"></p>
+		</td>
+	</tr>
+	<tr height="20%">
+		<td width="50%"></td>
+		<td>
+		<p>密&nbsp;&nbsp;&nbsp;&nbsp;码：<input type="password" name="password"
+			size="21"></p>
+		</td>
+	</tr>
+	<tr height="20%">
+		<td width="50%"></td>
+		<td>
+		<p>验&nbsp;证&nbsp;码：<input type="text" name="rand" size="15" onkeydown="intoLogin(this.form);"><img
+			src="/rand"></p>
+		</td>
+	</tr>
+	<tr height="20%">
+		<td width="50%"></td>
+		<td align="center"><input type="button" class="but_01"
+			onclick="checkForm(this.form);" value="登 录" onFocus="this.blur()"> <input
+			type="reset" class="but_01" value="重 置" class="btn01" onfocus="this.blur()"></td>
+	</tr>
+</table>
+</form>
+</div>
+</body>
+</html>

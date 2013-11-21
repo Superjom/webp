@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<title>left</title>
+<link href="/css/css_bak.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/sdmenu.js"></script>
+<script type="text/javascript">
+var myMenu;
+	window.onload = function() {
+		myMenu = new SDMenu("my_menu");
+		myMenu.init();
+		
+	};
+function MM_openBrWindow(theURL,winName,features) { //v2.0
+  window.open(theURL,winName,features);
+}
+</script>
+</head>
+<body class="left" style="overflow-x:hidden">
+<div class="left_xtgn">
+</div>
+<div id="my_menu" class="sdmenu">
+	#foreach($module in $user.getList())
+	<div>
+		<span>$!module.name</span>
+		#foreach($func in $module.getList())
+			<a href="/$module.flag/$func.flag?action=index&module_flag=$module.flag&func_flag=$func.flag" target="mainFrame">$!func.name</a>
+		#end
+	</div>
+	#end
+</div>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<div class="main_table">
+	<table width="100%" border="0" cellspacing="0" class="m_table">
+		<thead>
+			<tr>
+				<th align="center" width="10%">编号</th>
+				<th align="center" width="20%">策略</th>
+				<th align="center" width="20%">创建者</th>
+				<th align="center" width="20%">创建时间</th>
+				<th align="center" width="10%">状态</th>
+				<th align="center" width="20%">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			#if($list.size()==0)
+				<tr><td align="center" colspan="11"><font color="red">没有符合条件的记录！</font></td></tr>
+			#end
+			#set($no=0)
+			#foreach($ft in $list )
+			#set($no=$no+1)
+			<tr>
+				<td width="10%" align="center">$no</td>
+				<td width="20%" align="center">$!ft.tacaName</td>
+				<td width="20%" align="center">$!ft.userName</td>
+				<td width="20%" align="center">$!ft.dt</td>
+				<td width="10%" align="center">#if($purview.get("create")) <a href="#" onclick="pp.createschedule($ft.id)" style="text-decoration:none"> #end #if($!ft.status==1) <font color="green">成功</font> #elseif($!ft.status==-1) <font color="red">失败[$!ft.description]</font> #elseif($!ft.status==0) <font color="green">运行中</font> #end #if($isCreate) </a> #end</td>
+				<td width="20%" align="center">
+				#if($purview.get("query") && $!ft.status==1) <a href="#" onclick="pp.show($ft.id)" style="text-decoration:none;color:blue">&nbsp;展示&nbsp;</a> #end
+				#if($purview.get("delete") && $!ft.status!=0) <a href="#" onclick="pp.del($ft.id)" style="text-decoration:none;color:blue">&nbsp;删除&nbsp;</a> #end
+				</td>
+			</tr>
+			#end
+		</tbody>
+	</table>
+</div>

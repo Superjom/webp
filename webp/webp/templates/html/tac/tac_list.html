@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<title>head</title>
+<link href="/css/css_bak.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/user.js"></script>
+</head>
+<body>
+<div><img src="/images/position.gif" align="absmiddle" /> 当前位置：策略  </div>
+<div class="main_table">
+    <table width="100%" border="0" cellspacing="0" class="m_table">
+      <thead>
+        <tr>
+          <th width="10%" align="center">策略名称</th>
+          <th width="16%" align="center">策略invlink数据路径</th>
+          <th width="16%" align="center">策略invlink_after_translate数据路径</th>
+          <th width="16%" align="center">策略invlink_count数据路径</th>
+          <th width="16%" align="center">策略invlink_count数据路径</th>
+          <th width="16%" align="center">策略invlink_count数据路径</th>
+          <th width="10%" align="center">策略创建时间</th>
+        </tr>
+      </thead>
+      <tbody>
+      #foreach($tac in $list )
+        <tr>
+          <td width="10%" align="center">$!tac.name</td>
+          <td width="16%" align="center">$!tac.invlinkPath</td>
+          <td width="16%" align="center">$!tac.invlinkatPath</td>
+          <td width="16%" align="center">$!tac.invlinkcPath</td>
+          <td width="16%" align="center">$!tac.urllistPath</td>
+          <td width="16%" align="center">$!tac.pagerankmcPath</td>
+          <td width="10%" align="center">$!tac.dt</td>
+        </tr>
+       #end
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

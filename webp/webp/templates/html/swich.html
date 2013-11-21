@@ -1,0 +1,44 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>swich</title>
+<link href="css/css.css" rel="stylesheet" type="text/css" />
+<script language="javascript">
+
+function switchSysBar(){
+ if (parent.document.getElementById('attachucp').cols=="190,10,*"){
+ document.getElementById('leftbar').style.display="";
+ parent.document.getElementById('attachucp').cols="0,10,*";
+ }
+ else{
+ parent.document.getElementById('attachucp').cols="190,10,*";
+ document.getElementById('leftbar').style.display="none"
+ }
+}
+function load(){
+ if (parent.document.getElementById('attachucp').cols=="0,10,*"){
+ document.getElementById('leftbar').style.display="";
+ }
+}
+
+</script>
+<style type="text/css">
+<!--
+body {
+	margin: 0px;
+}
+-->
+</style></head>
+<body  onLoad="load()" >
+<center>
+  <table height="100%" cellspacing="0" cellpadding="0" border="0" width="100%">
+    <tbody>
+      <tr>
+        <td id="leftbar"  style="display: none;"><a onClick="switchSysBar()" href="javascript:void(0);"> <img height="42" border="0" width="10" alt="展开左侧菜单" src="/images/swich_r.gif"/> </a> </td>
+        <td id="rightbar" ><a onClick="switchSysBar()" href="javascript:void(0);"> <img height="42" border="0" width="10" alt="隐藏左侧菜单" src="/images/swich_l.gif"/> </a> </td>
+      </tr>
+    </tbody>
+  </table>
+</center>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<form name="tacUpdateForm" onsubmit="tac.update($tac.id);return false;">
+<div class="main_table">
+	<table class="m_table" width="100%" border="0" cellspacing="0">
+		<thead>
+			<tr>
+				<th align="left"><img src="/images/sub_func.gif"
+					align="absmiddle" /> <span>更新策略</span></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+					<table bgcolor="#F0F8E2" width="100%" border="0" cellpadding="6"
+						cellspacing="1">
+						<tr>
+							<td width="25%"></td>
+							<td width="20%" align="right">名称</td>
+							<td width="20%" align="left">
+							<input name="name" id="name" value="$!tac.name" type="text" class="formtext_b80" />
+							</td>
+							<td align="left" id="info_1" style="color: red"></td>
+						</tr>
+						<tr>
+							<td width="25%"></td>
+							<td width="20%" align="right">描述</td>
+							<td width="20%" align="left">
+							<textarea cols="50" rows="10" name="description" id="description">$!tac.description</textarea>
+							</td>
+							<td></td>
+						</tr>
+						<tr>
+          					<td width="25%"></td>
+            				<td width="20%" align="right">创建时间</td>
+            				<td width="20%" align="left">$!tac.dt</td>
+            				<td></td>
+          				</tr>
+          				<tr>
+							<td width="25%"></td>
+							<td width="20%" align="right"><B>键-值</B></td>
+							<td width="20%" align="left"></td>
+							<td></td>
+						</tr>
+						#set($no=0)
+						#foreach($key in $tac.getMap().keySet() )
+						#set($no=$no+1)
+						<tr>
+							<td width="25%"></td>
+							<td width="20%" align="right"><input name="key_$no" id="key_$no" value="$key" type="text" class="formtext_b80" /></td>
+							<td width="20%" align="left" colspan="2"><input name="value_$no" id="value_$no" value="$tac.getMap().get($key)" type="text" class="formtext_b80" /></td>
+						</tr>
+						#end
+						#set($no=$no+1)
+						#if($no<=5)
+							#foreach($foo in [$no..5])
+								<tr>
+									<td width="25%"></td>
+									<td width="20%" align="right"><input name="key_$foo" id="key_$foo" type="text" class="formtext_b80" /></td>
+									<td width="20%" align="left" colspan="2"><input name="value_$foo" id="value_$foo" type="text" class="formtext_b80" /></td>
+								</tr>
+							#end
+						#end
+					</table>
+					<div class="form_control">
+						<input name="submit1" type="submit" class="but_01" value="提交" />
+						<input name="submit2" type="button" onclick="tac.list()" class="but_01" value="返回" />
+					</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+</form>

@@ -1,0 +1,88 @@
+<form name="userUpdateForm" onsubmit="user.update($user.id);return false;">
+<div class="main_table">
+	<table class="m_table" width="100%" border="0" cellspacing="0">
+		<thead>
+			<tr>
+				<th align="left"><img src="/images/sub_func.gif"
+					align="absmiddle" /> <span>更新用户</span><input type="hidden" id="isAdmin" value="#if($purview.get("isAdmin")) 1 #else 0 #end" /></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+					<table bgcolor="#F0F8E2" width="100%" border="0" cellpadding="6"
+						cellspacing="1">
+						<tr>
+							<td width="25%"></td>
+							<td width="20%" align="right">账号</td>
+							<td width="20%" align="left">$!user.userId</td>
+							<td align="left" style="color: red">不可修改</td>
+						</tr>
+						#if(!$purview.get("isAdmin"))
+						<tr>
+							<td width="25%"></td>
+							<td width="20%" align="right">原密码</td>
+							<td width="20%" align="left">
+							<input name="old_pwd" id="old_pwd" type="password" class="formtext_b80" />
+							</td>
+							<td align="left" id="info_1" style="color: red"></td>
+						</tr>
+						#else
+						<input type="hidden" id="old_pwd" name="old_pwd" value="" />
+						#end
+						<tr>
+							<td width="25%"></td>
+							<td width="20%" align="right">新密码</td>
+							<td width="20%" align="left">
+							<input name="new_pwd" id="new_pwd" type="password" class="formtext_b80" />
+							</td>
+							<td align="left" id="info_2" style="color: red"></td>
+						</tr>
+						<tr>
+							<td width="25%"></td>
+							<td width="20%" align="right">重复密码</td>
+							<td width="20%" align="left">
+							<input name="new_pwd_1" id="new_pwd_1" type="password" class="formtext_b80" />
+							</td>
+							<td align="left" id="info_3" style="color: red"></td>
+						</tr>
+						<tr>
+							<td width="25%"></td>
+							<td width="20%" align="right">姓名</td>
+							<td width="20%" align="left">
+							<input name="name" id="name" value="$!user.name" type="text" class="formtext_b80" />
+							</td>
+							<td align="left" id="info_4" style="color: red"></td>
+						</tr>
+						<tr>
+          					<td width="25%"></td>
+            				<td width="20%" align="right">性别</td>
+            				<td width="20%" align="left">
+            				<input type="radio" name="sex" value="1" type="text" #if($user.sex==1) checked #end />男
+            				<input type="radio" name="sex" value="2" type="text" #if($user.sex==2) checked #end />女
+							</td>
+            				<td></td>
+          				</tr>
+						<tr>
+							<td width="25%"></td>
+							<td width="20%" align="right">所属角色</td>
+							<td width="20%" align="left">$!user.roleName</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td width="25%"></td>
+							<td width="20%" align="right">创建日期</td>
+							<td width="20%" align="left">$!user.dt</td>
+							<td></td>
+						</tr>
+					</table>
+					<div class="form_control">
+						<input name="submit1" type="submit" class="but_01" value="提交" />
+						<input name="submit2" type="button" onclick="user.list()" class="but_01" value="返回" />
+					</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+</form>

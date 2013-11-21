@@ -1,0 +1,42 @@
+<form name="noticeCreateForm" onsubmit="notice.create();return false;">
+<div class="main_table">
+	<table class="m_table" width="100%" border="0" cellspacing="0">
+		<thead>
+			<tr>
+				<th align="left"><img src="/images/sub_func.gif"
+					align="absmiddle" /> <span>创建公告</span>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+					<table bgcolor="#F0F8E2" width="100%" border="0" cellpadding="6"
+						cellspacing="1">
+						<tr>
+							<td width="25%"></td>
+							<td width="20%" align="right">标题</td>
+							<td width="20%" align="left">
+							<input name="title" id="title" type="text" class="formtext_b80" />
+							</td>
+							<td align="left" id="info_1" style="color: red"></td>
+						</tr>
+						<tr>
+							<td width="25%"></td>
+							<td width="20%" align="right">内容</td>
+							<td width="20%" align="left">
+							<textarea cols="50" rows="10" name="content" id="content"></textarea>
+							</td>
+							<td></td>
+						</tr>
+					</table>
+					<div class="form_control">
+						<input name="submit1" type="submit" class="but_01" value="提交" />
+						<input name="submit2" type="button" onclick="notice.list()" class="but_01" value="返回" />
+					</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+</form>

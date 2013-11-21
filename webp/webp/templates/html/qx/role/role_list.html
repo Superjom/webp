@@ -1,0 +1,36 @@
+<div class="main_table">
+	<table width="100%" border="0" cellspacing="0" class="m_table">
+		<thead>
+			<tr>
+				<th align="center" width="10%">编号</th>
+				<th align="center" width="20%">名称</th>
+				<th align="center" width="30%">描述</th>
+				<th align="center" width="20%">创建时间</th>
+				<th align="center" width="20%">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			#if($list.size()==0)
+				<tr><td align="center" colspan="11"><font color="red">没有符合条件的记录！</font></td></tr>
+			#end
+			#set($no=0)
+			#foreach($role in $list )
+			#set($no=$no+1)
+			<tr>
+				<td width="10%" align="center">$no</td>
+				<td width="20%" align="center">$!role.name</td>
+				<td width="30%" align="center">$!role.description</td>
+				<td width="20%" align="center">$!role.dt</td>
+				<td width="20%" align="center">
+				#if($purview.get("isAdmin") || ($purview.get("update") && $role_id==$role.id))
+					<a href="#" onclick="rolee.updateinit($!role.id)" style="text-decoration:none;color:blue">&nbsp;更新&nbsp;</a>
+				#end
+				#if($role.id!=1 && $purview.get("isAdmin"))
+					<a href="#" onclick="rolee.del($!role.id)" style="text-decoration:none;color:blue">&nbsp;删除&nbsp;</a>
+				#end
+				</td>
+			</tr>
+			#end
+		</tbody>
+	</table>
+</div>

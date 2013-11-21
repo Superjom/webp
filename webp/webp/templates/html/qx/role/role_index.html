@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<title>head</title>
+<link href="/css/css_bak.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/qx/role.js"></script>
+</head>
+<body>
+	<div>
+		<img src="/images/position.gif" align="absmiddle" /> 当前位置：角色管理
+		<input type="hidden" id="module_flag" value="$module_flag" />
+		<input type="hidden" id="func_flag" value="$func_flag" />
+	</div>
+	<form name="roleQueryForm" onsubmit="rolee.list();return false;">
+	<div align="right">
+		<table width="50%" border="0" cellspacing="0" class="m_table">
+			<tr>
+				<td width="45%"></td>
+				<td width="35%" align="right">关键字：&nbsp;<input name="keyword" id="keyword" type="text" class="formtext_b60" size="30" /></td>
+				<td width="20%" align="left">
+				<input name="submit1" type="submit" class="but_01" value="查 询" />&nbsp;
+				#if($purview.get("isAdmin"))
+				<input name="submit2" onclick="rolee.createinit()" type="button" class="but_01" value="创建" />&nbsp;
+				#end
+				</td>
+			</tr>
+		</table>
+	</div>
+	</form>
+	<div id="role_list" align="center">
+		<div class="main_table">
+			<table width="100%" border="0" cellspacing="0" class="m_table">
+				<thead>
+					<tr>
+						<th align="center" width="10%">编号</th>
+						<th align="center" width="20%">名称</th>
+						<th align="center" width="30%">描述</th>
+						<th align="center" width="20%">创建时间</th>
+						<th align="center" width="20%">操作</th>
+					</tr>
+				</thead>
+				<thead>
+					<tr>
+						<td align="center" colspan="11"><font color="red">请点击“查询”按钮进行数据的查询！</font></td>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div id='role_create'></div>
+	<div id='role_update'></div>
+</body>
+</html>
