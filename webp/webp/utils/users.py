@@ -25,7 +25,7 @@ def user_info_context(request):
 
     return user
 
-def login(username, password):
+def login(request, userid, password):
     """
     input username and password
     search database
@@ -38,13 +38,18 @@ def login(username, password):
     @returns:
         object of User / None
     """
-    username = 'admin'
-    password = 'admin'
     db = DB()
     db.execute(
-        "select pwd,password('%s') mypwd from user where userid='%s'" % (password, username))
+        "select pwd,password('%s') mypwd from user where userid='%s'" % (password, userid))
     res = db.fetchone()
-    return res
+
+    pwd, mypwd = res if res else (None, None)
+
+    if pwd and pwd == mypwd:
+        # save user info to session
+        request.session['userid'] = userid
+        return True
+
 
 
 def logout(request):

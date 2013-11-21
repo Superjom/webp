@@ -134,6 +134,10 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.messages.context_processors.messages'
     )
 
+# session config
+CACHE_BACKEND = 'memcached://127.0.0.1:8091'
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+CACHE_MIDDLEWARE_SECONDS=30
 
 if DEBUG:
     LOGGING = {

@@ -88,13 +88,13 @@
                 <!-- redirect to index -->
                 <p class="text-success"> {{ login_info.info }} </p>
                 <script>
-                    //window.location.replace("/");
+                    window.location.replace("/");
                 </script>
             {% endif %}
 
         {% endif %}
 
-        <input type="text" name="username" class="form-control" placeholder="User Name" required autofocus>
+        <input type="text" name="userid" class="form-control" placeholder="User Name" required autofocus>
         <input type="password" name="password" class="form-control" placeholder="Password" required>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
       </form>

@@ -9,28 +9,24 @@ from webp.utils.objects.LoginInfo import LoginInfo
 import webp.utils.users as users_ctrl
 
 def login(request):
-    userid = request.session.get('userid', None)
-    password = request.session.get('password', None)
+    userid = request.POST.get('userid', None)
+    password = request.POST.get('password', None)
     
     login_info = LoginInfo()
 
     context = {}
     context.update(csrf(request))
     
-    '''
     # check userid password format
     if not userid and password:
         login_info.kind = -3
         context.update( {'login_info': login_info})
         return render_to_response("./login.html", context)
-    '''
     # search in database
-    userinfo = users_ctrl.login(userid, password)
-    print userinfo
+    res = users_ctrl.login(request, userid, password)
+    print res
+    login_info.kind = 0 if res else -1
 
-    login_info.kind = 0
-
-    context.update({'userinfo': str(userinfo)})
     context.update( {'login_info': login_info})
 
     return render_to_response("./login.html", context)
