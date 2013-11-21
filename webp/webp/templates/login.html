@@ -73,6 +73,7 @@
 
       <form class="form-signin" method="post" action="/users/login"> {% csrf_token %}
         <h2 class="form-signin-heading">Please sign in</h2>
+        <b>userinfo: {{userinfo}}</b>
 
         <b>login: {{ login_info }} </b>
 

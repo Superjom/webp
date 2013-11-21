@@ -8,9 +8,16 @@ Created on 11 21, 2013
 '''
 import MySQLdb
 
-conn=MySQLdb.connect(host='10.48.56.63',user='root',passwd='123456',db='invlink',port=3306)
+conn=MySQLdb.connect(host='localhost',user='root',passwd='root',db='invlink',port=3306)
 cur=conn.cursor()
-cur.execute('select * from user')
+
+cur.execute(
+    "select pwd,password('%s') mypwd from user where userid='%s'" % ('admin', 'admin'))
+
+res = cur.fetchone()
+
+print 'res', res
+
 cur.close()
 conn.close()
 

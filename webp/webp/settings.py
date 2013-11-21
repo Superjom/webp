@@ -52,8 +52,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': "invlink",
         'USER': "root",
-        'PASSWORD': "123456",
-        'HOST': '10.48.56.63',
+        'PASSWORD': "root",
+        'HOST': 'localhost',
         'PORT': '3306',
     }
 }

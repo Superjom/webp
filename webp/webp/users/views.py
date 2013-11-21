@@ -13,20 +13,24 @@ def login(request):
     password = request.session.get('password', None)
     
     login_info = LoginInfo()
+
+    context = {}
+    context.update(csrf(request))
     
+    '''
     # check userid password format
     if not userid and password:
         login_info.kind = -3
-
-        return render_to_response("./users/login.html", {'login_info': {'is_error':True, 'info':'error'}})
-                        
-
+        context.update( {'login_info': login_info})
+        return render_to_response("./login.html", context)
+    '''
     # search in database
     userinfo = users_ctrl.login(userid, password)
     print userinfo
 
-    login_info.kind = -1
+    login_info.kind = 0
 
-    return render_to_response("./users/login.html", {'login_info': {'is_error':True, 'info':'error'}})
+    context.update({'userinfo': str(userinfo)})
+    context.update( {'login_info': login_info})
 
-    return render_to_response( "./users/login.html", {'login_info': login_info})
+    return render_to_response("./login.html", context)

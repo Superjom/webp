@@ -38,9 +38,11 @@ def login(username, password):
     @returns:
         object of User / None
     """
+    username = 'admin'
+    password = 'admin'
     db = DB()
     db.execute(
-        "select pwd,password('%s') mypwd from user where userid='%s'" % (username, password))
+        "select pwd,password('%s') mypwd from user where userid='%s'" % (password, username))
     res = db.fetchone()
     return res
 
