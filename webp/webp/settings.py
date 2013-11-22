@@ -36,6 +36,9 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # custom
+    'webp.utils',
+    'webp.users',
 )
 
 
@@ -139,6 +142,8 @@ CACHE_BACKEND = 'memcached://127.0.0.1:8091'
 SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 CACHE_MIDDLEWARE_SECONDS=30
 
+
+'''
 if DEBUG:
     LOGGING = {
         'version': 1,
@@ -202,3 +207,4 @@ if DEBUG:
         }
     }                       
 
+'''

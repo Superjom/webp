@@ -11,19 +11,30 @@ Created on 11 21, 2013
 class User(object):
 
     def __init__(self, id=-1, userId="", name="",
-                password="", roleID=-1, roleName="", dt="", _list=[]):
+                password="", roleId=-1, roleName="", dt="", _list=[]):
 
         self.id =       id
         self.userId =   userId
         self.name   =   name
         self.password = password
-        self.roleID =   roleID
+        self.roleId =   roleId
         self.roleName = roleName
         self.dt =       dt
         self.list =     _list
 
     def isAdmin(self):
-        return self.roleID == 1
+        return self.roleId == 1
+
+    def __str__(self):
+        return '\n'.join([
+            '<User ',
+            'id: %d' % self.id,
+            'userId: %s' % self.userId,
+            'name: %s' % self.name,
+            'roleId: %s' % self.roleId,
+            'list: %s' % ' '.join([ str(m) for m in self.list]),
+            '>',
+        ])
 
 
 
