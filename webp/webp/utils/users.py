@@ -61,14 +61,6 @@ class User(object):
         return str(self.userobject)
 
 
-
-
-
-
-
-
-
-
 def user_info_context(request):
     """
     返回 userid 及 登陆框
@@ -83,6 +75,7 @@ def user_info_context(request):
     user = UserObject(userId=userid, name=username)
 
     return user
+
 
 def login(request, userid, password):
     """
@@ -107,6 +100,8 @@ def login(request, userid, password):
     if pwd and pwd == mypwd:
         # save user info to session
         request.session['userid'] = userid
+        userobject = User(userid)
+        request.session['userobject'] = userobject
         return True
 
 
@@ -115,7 +110,11 @@ def logout(request):
     """
     clear session of current user
     """
-    raise NotImplemented
+    if 'userid' in request.session:
+        del request.session['userid']
+
+    if 'userobject' in request.session:
+        del request.session['userobject']
 
 
 
