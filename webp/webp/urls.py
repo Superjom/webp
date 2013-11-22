@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, include, url
 
 
-from webp.views import index, header, footer, left, login
+from webp.views import index, header, footer, left, login, logout
 
 urlpatterns = patterns('',
     # Examples:
@@ -13,6 +13,7 @@ urlpatterns = patterns('',
     url(r'^footer$', footer),
     url(r'^left$', left),
     url(r'^login$', login),
+    url(r'^logout$', logout),
 
     url(r'users/', include('webp.users.urls')),
 

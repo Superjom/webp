@@ -11,11 +11,12 @@ class Module(object):
     """
     module of function
     """
-    def __init__(self, id=-1, flag="", name="", _list=[]):
+    def __init__(self, id=-1, flag="", name=""):
+
         self.id = id
         self.flag = flag
         self.name = name
-        self.list = _list
+        self.list = []
 
     def __str__(self):
         return '\n'.join([

@@ -10,6 +10,7 @@ Created on 11 11, 2013
 from webp.utils.objects.User import User as UserObject
 from webp.utils.module import Module
 from webp.utils.db import DB
+from webp.utils import e
 
 class User(object):
     def __init__(self, userid):
@@ -33,7 +34,7 @@ class User(object):
             o = self.userobject
             o.id, o.userId, o.name, o.roleId = \
                     res[0], res[1], res[2], res[4]
-        print 'user_info:', self.userobject
+        #print 'user_info:', self.userobject
 
     def _fill_module(self):
         '''
@@ -48,10 +49,11 @@ class User(object):
         print 'get res: ', res
 
         for module_id, module_flag, module_name in res:
-            print 'get module', module_id, module_flag, module_name 
+            print '@ get module', module_id, module_flag, module_name 
             m = Module(module_id)
             m.fill(module_flag, module_name, roleId)
             module = m.get_object()
+            print '@ modulename len', module_name, len(module.list)
             self.userobject.list.append(module)
 
     def get_object(self):
@@ -66,15 +68,12 @@ def user_info_context(request):
     返回 userid 及 登陆框
     用于登陆
     """
-    userid = request.session.get('userid', None)
-    username = request.session.get('username', None)
+    userobject = request.session.get('userobject', None)
 
-    if not userid and username:
+    if not userobject:
         return None
 
-    user = UserObject(userId=userid, name=username)
-
-    return user
+    return {'user' : userobject}
 
 
 def login(request, userid, password):
@@ -101,7 +100,8 @@ def login(request, userid, password):
         # save user info to session
         request.session['userid'] = userid
         userobject = User(userid)
-        request.session['userobject'] = userobject
+        userobject.fill()
+        request.session['userobject'] = userobject.get_object()
         return True
 
 

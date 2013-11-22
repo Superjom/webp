@@ -3,8 +3,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gbk" />
 <title>left</title>
-<link href="/css/css_bak.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="/js/sdmenu.js"></script>
+<link href="/static/css/css_bak.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/static/js/sdmenu.js"></script>
 <script type="text/javascript">
 var myMenu;
 	window.onload = function() {
@@ -21,14 +21,15 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
 <div class="left_xtgn">
 </div>
 <div id="my_menu" class="sdmenu">
-	#foreach($module in $user.getList())
-	<div>
-		<span>$!module.name</span>
-		#foreach($func in $module.getList())
-			<a href="/$module.flag/$func.flag?action=index&module_flag=$module.flag&func_flag=$func.flag" target="mainFrame">$!func.name</a>
-		#end
-	</div>
-	#end
+    {% for module in user.list %}
+        <div>
+            <span>{{ module.name }}</span>
+            {% for func in module.list %}
+            <a href="/{{module.flag}}/{{func.flag}}?action=index&module_flag={{module.flag}}&func_flag={{func.flag}}" target="mainFrame">{{func.name}}</a>
+            {% endfor %}
+        </div>
+    {% endfor %}
+
 </div>
 </body>
 </html>

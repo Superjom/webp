@@ -33,6 +33,7 @@ class Module(object):
 
     #TODO some bugs here
     def _fill_funcs(self):
+        print 'module init len', len(self.moduleobject.list)
         sql = "select a.id func_id,a.flag func_flag,a.name func_name,c.flag purview_flag from func a,func_purview_role_rel b,purview c where a.id=b.func_id and b.purview_id=c.id and a.module_id=%d and b.role_id=%d order by a.sequence asc,a.id desc" % (self.id, self.roleId)
         self.db.execute(sql)
         res = self.db.fetchall()
@@ -40,13 +41,16 @@ class Module(object):
         func_ids = set()
         last_f = None
 
+        print 'module res:', res
+
         for func_id, func_flag, func_name, purview_flag in res:
 
-            print '@func: ', func_id, func_flag, func_name, purview_flag 
+            print '@func:', func_id, func_flag, func_name, purview_flag 
+            print '@func_ids', func_ids
+            print '@module len', len(self.moduleobject.list)
 
             if func_id in func_ids:
                 last_f.purview.add(purview_flag)
-                pass
 
             else:
                 func_ids.add(func_id)
@@ -55,8 +59,9 @@ class Module(object):
                     flag = func_flag,
                     name = func_name
                 )
-                self.moduleobject.list.append(f)
                 f.purview.add(purview_flag)
+                self.moduleobject.list.append(f)
+                print 'module append len', len(self.moduleobject.list)
                 last_f = f
 
     def __str__(self):
