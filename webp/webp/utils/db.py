@@ -9,8 +9,10 @@ Created on 11 21, 2013
 from django.db import connection
 
 class DB(object):
-    def execute(self, cmd):
+    def __init__(self):
         self.cursor = connection.cursor()
+
+    def execute(self, cmd):
         self.cursor.execute(cmd)
 
     def fetchone(self):

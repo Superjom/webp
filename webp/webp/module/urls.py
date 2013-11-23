@@ -11,7 +11,7 @@ from django.conf.urls import patterns, url
 
 urlpatterns = patterns('',
     url(r'^nonmarked/nonmarkedtac$', 'webp.module.views.nonmarked.tac_index', name="tac_index"),
-    url(r'^nonmarked/tac$', 'webp.module.views.nonmarked.tac_list', name="tac_list"),
+    url(r'^nonmarked/tac/list$', 'webp.module.views.nonmarked.tac_list', name="tac_list"),
 )
 
 

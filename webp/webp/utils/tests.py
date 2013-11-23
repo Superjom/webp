@@ -32,6 +32,13 @@ class UserTestCase(TestCase):
         #self.assertEqual(cat.speak(), 'The cat says "meow"')
         print self.user.get_object()
 
+    def test_get_module(self):
+        module = self.user.get_object().get_module('nonmarked')
+        print 'get module', module
+
+        func = module.get_func('nonmarkedtac')
+        print 'get func', func
+
 class ModuleTestCase(TestCase):
     def setUp(self):
         print '-' * 200
@@ -40,6 +47,7 @@ class ModuleTestCase(TestCase):
         self.module.fill('dcg', 'DCG', 1)
         obj = self.module.get_object()
         print obj
+
 
 
 
