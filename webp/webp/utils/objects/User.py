@@ -25,6 +25,11 @@ class User(object):
     def isAdmin(self):
         return self.roleId == 1
 
+    def get_module(self, flag):
+        for m in self.list:
+            if m.flag == flag:
+                return m
+
     def __str__(self):
         return '\n'.join([
             '<User ',

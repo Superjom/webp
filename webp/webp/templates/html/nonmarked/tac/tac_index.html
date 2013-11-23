@@ -1,58 +1,116 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
+
 <meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+
 <title>head</title>
-<link href="/css/css_bak.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="/js/jquery.js"></script>
-<script type="text/javascript" src="/js/nonmarked/tac.js"></script>
+
+<link href="/static/css/css_bak.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="/static/js/jquery.js"></script>
+
+<script type="text/javascript" src="/static/js/nonmarked/tac.js"></script>
+
 </head>
+
 <body>
-	<div>
-		<img src="/images/position.gif" align="absmiddle" /> µ±Ç°Î»ÖÃ£º²ßÂÔ
-		<input type="hidden" id="module_flag" value="$module_flag" />
-		<input type="hidden" id="func_flag" value="$func_flag" />
-	</div>
-	<form name="tacQueryForm" onsubmit="tac.list();return false;">
-	<div align="right">
-		<table width="50%" border="0" cellspacing="0" class="m_table">
-			<tr>
-				<td width="45%"></td>
-				<td width="35%" align="right">²ßÂÔ£º&nbsp;<input name="tac_name" id="tac_name" type="text" class="formtext_b60" size="30" /></td>
-				<td width="20%" align="left">
-				<input name="submit1" type="submit" class="but_01" value="²é Ñ¯" />&nbsp;
-				#if($purview.get("create"))
-				<input name="submit2" onclick="tac.createinit()" type="button" class="but_01" value="´´½¨" />&nbsp;
-				#end
-				</td>
-			</tr>
-		</table>
-	</div>
-	</form>
-	<div id="tac_list" align="center">
-		<div class="main_table">
-			<table width="100%" border="0" cellspacing="0" class="m_table">
-				<thead>
-					<tr>
-						<th align="center" width="5%">±àºÅ</th>
-						<th align="center" width="10%">Ãû³Æ</th>
-						<th align="center" width="10%">ÃèÊö</th>
-						<th align="center" width="10%">´´½¨Ê±¼ä</th>
-						<th align="center" width="55%">¼ü-Öµ</th>
-						<th align="center" width="10%">²Ù×÷</th>
-					</tr>
-				</thead>
-				<thead>
-					<tr>
-						<td align="center" colspan="11"><font color="red">Çëµã»÷¡°²éÑ¯¡±°´Å¥½øĞĞÊı¾İµÄ²éÑ¯£¡</font></td>
-					</tr>
-				</thead>
-				<tbody>
-				</tbody>
-			</table>
-		</div>
-	</div>
-	<div id='tac_create'></div>
-	<div id='tac_update'></div>
+
+    <div>
+
+        <img src="/static/images/position.gif" align="absmiddle" /> å½“å‰ä½ç½®ï¼šç­–ç•¥
+
+        <input type="hidden" id="module_flag" value="$module_flag" />
+
+        <input type="hidden" id="func_flag" value="$func_flag" />
+
+    </div>
+
+    <form name="tacQueryForm" onsubmit="tac.list();return false;">
+
+    <div align="right">
+
+        <table width="50%" border="0" cellspacing="0" class="m_table">
+
+            <tr>
+
+                <td width="45%"></td>
+
+                <td width="35%" align="right">ç­–ç•¥ï¼š&nbsp;<input name="tac_name" id="tac_name" type="text" class="formtext_b60" size="30" /></td>
+
+                <td width="20%" align="left">
+
+                <input name="submit1" type="submit" class="but_01" value="æŸ¥ è¯¢" />&nbsp;
+
+                #if($purview.get("create"))
+
+                <input name="submit2" onclick="tac.createinit()" type="button" class="but_01" value="åˆ›å»º" />&nbsp;
+
+                #end
+
+                </td>
+
+            </tr>
+
+        </table>
+
+    </div>
+
+    </form>
+
+    <div id="tac_list" align="center">
+
+        <div class="main_table">
+
+            <table width="100%" border="0" cellspacing="0" class="m_table">
+
+                <thead>
+
+                    <tr>
+
+                        <th align="center" width="5%">ç¼–å·</th>
+
+                        <th align="center" width="10%">åç§°</th>
+
+                        <th align="center" width="10%">æè¿°</th>
+
+                        <th align="center" width="10%">åˆ›å»ºæ—¶é—´</th>
+
+                        <th align="center" width="55%">é”®-å€¼</th>
+
+                        <th align="center" width="10%">æ“ä½œ</th>
+
+                    </tr>
+
+                </thead>
+
+                <thead>
+
+                    <tr>
+
+                        <td align="center" colspan="11"><font color="red">è¯·ç‚¹å‡»â€œæŸ¥è¯¢â€æŒ‰é’®è¿›è¡Œæ•°æ®çš„æŸ¥è¯¢ï¼</font></td>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <div id='tac_create'></div>
+
+    <div id='tac_update'></div>
+
 </body>
+
 </html>

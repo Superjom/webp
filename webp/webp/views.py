@@ -6,7 +6,6 @@ Created on 11 11, 2013
 @author: Chunwei Yan @ pkusz
 @mail:  yanchunwei@outlook.com
 '''
-from django.views.decorators.csrf import csrf_exempt
 from django.core.context_processors import csrf
 from django.shortcuts import render, render_to_response, redirect
 

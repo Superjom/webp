@@ -1,18 +1,19 @@
+
 <div class="main_table">
 	<table width="100%" border="0" cellspacing="0" class="m_table">
 		<thead>
 			<tr>
-				<th width="5%" align="center">±àºÅ</th>
-				<th width="10%" align="center">Ãû³Æ</th>
-				<th width="10%" align="center">ÃèÊö</th>
-				<th width="10%" align="center">´´½¨Ê±¼ä</th>
-				<th width="55%" align="center">¼ü-Öµ</th>
-				<th width="10%" align="center">²Ù×÷</th>
+				<th width="5%" align="center">ç¼–å·</th>
+				<th width="10%" align="center">åç§°</th>
+				<th width="10%" align="center">æè¿°</th>
+				<th width="10%" align="center">åˆ›å»ºæ—¶é—´</th>
+				<th width="55%" align="center">é”®-å€¼</th>
+				<th width="10%" align="center">æ“ä½œ</th>
 			</tr>
 		</thead>
 		<tbody>
 			#if($list.size()==0)
-				<tr><td align="center" colspan="11"><font color="red">Ã»ÓĞ·ûºÏÌõ¼şµÄ¼ÇÂ¼£¡</font></td></tr>
+				<tr><td align="center" colspan="11"><font color="red">æ²¡æœ‰ç¬¦åˆæ¡ä»¶çš„è®°å½•ï¼</font></td></tr>
 			#end
 			#set($no=0)
 			#foreach($tac in $list )
@@ -29,10 +30,10 @@
 				</td>
 				<td width="10%" align="center">
 				#if($purview.get("update"))
-					<a href="#" onclick="tac.updateinit($!tac.id)" style="text-decoration:none;color:blue">&nbsp;¸üĞÂ&nbsp;</a>
+					<a href="#" onclick="tac.updateinit($!tac.id)" style="text-decoration:none;color:blue">&nbsp;æ›´æ–°&nbsp;</a>
 				#end
 				#if($purview.get("delete"))
-					<a href="#" onclick="tac.del($!tac.id)" style="text-decoration:none;color:blue">&nbsp;É¾³ı&nbsp;</a>
+					<a href="#" onclick="tac.del($!tac.id)" style="text-decoration:none;color:blue">&nbsp;åˆ é™¤&nbsp;</a>
 				#end
 				</td>
 			</tr>
@@ -40,3 +41,4 @@
 		</tbody>
 	</table>
 </div>
+

@@ -18,6 +18,11 @@ class Module(object):
         self.name = name
         self.list = []
 
+    def get_func(self, flag):
+        for f in self.list:
+            if f.flag == flag:
+                return f
+
     def __str__(self):
         return '\n'.join([
             '<Module',
