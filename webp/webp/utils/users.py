@@ -10,7 +10,6 @@ Created on 11 11, 2013
 from webp.utils.objects.User import User as UserObject
 from webp.utils.module import Module
 from webp.utils.db import DB
-from webp.utils import e
 
 class User(object):
     def __init__(self, userid):

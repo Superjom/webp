@@ -6,7 +6,7 @@ Created on 11 21, 2013
 @author: Chunwei Yan @ pkusz
 @mail:  yanchunwei@outlook.com
 '''
-from django.db import connection
+from django.db import connection, transaction
 
 class DB(object):
     def __init__(self):
@@ -15,11 +15,17 @@ class DB(object):
     def execute(self, cmd):
         self.cursor.execute(cmd)
 
+    def commit(self):
+        transaction.commit_unless_managed()
+        self.cursor.close()
+
     def fetchone(self):
-        return self.cursor.fetchone()
+        res = self.cursor.fetchone()
+        return res
 
     def fetchall(self):
-        return self.cursor.fetchall()
+        res = self.cursor.fetchall()
+        return res
 
 
 if __name__ == "__main__":

@@ -16,3 +16,6 @@ def debug():
     sys.path.append(path)
     os.environ['DJANGO_SETTINGS_MODULE'] = 'webp.settings' 
 
+def copy_dic(dic, newdic):
+    for key,value in dic.items():
+        newdic[key] = value

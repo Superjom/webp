@@ -15,6 +15,7 @@
             {% if not list %}
 				<tr><td align="center" colspan="11"><font color="red">没有符合条件的记录！</font></td></tr>
             {% endif %}
+
             {% for tac in list %}
 			<tr>
                 <td width="5%" align="center">{{ forloop.counter }}</td>
@@ -22,14 +23,17 @@
                 <td width="10%" align="center">{{ tac.description }}</td>
                 <td width="10%" align="center">{{ tac.dt }}</td>
 				<td width="55%" align="center">
+                    {% for item in tac.keyvalues %}
+                        {{ item.0 }}={{ item.1 }};
+                    {% endfor %}
 				</td>
 				<td width="10%" align="center">
-                {% if purview_has_create %}
-					<a href="#" onclick="tac.updateinit($!tac.id)" style="text-decoration:none;color:blue">&nbsp;更新&nbsp;</a>
+                {% if purview_has_update %}
+                <a href="#" onclick="tac.updateinit({{ tac.id }})" style="text-decoration:none;color:blue">&nbsp;更新&nbsp;</a>
                 {% endif %}
 
                 {% if purview_has_delete %}
-					<a href="#" onclick="tac.del($!tac.id)" style="text-decoration:none;color:blue">&nbsp;删除&nbsp;</a>
+                <a href="#" onclick="tac.del({{tac.id}})" style="text-decoration:none;color:blue">&nbsp;删除&nbsp;</a>
                 {% endif %}
 				</td>
 			</tr>

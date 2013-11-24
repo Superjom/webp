@@ -17,7 +17,7 @@ Tac.prototype = {
             return;
         }
         //htmlobj=$.ajax({url:baseUrl+"?action=delete&module_flag="+$("#module_flag").val()+"&func_flag="+$("#func_flag").val()+"&tac_id="+tac_id+"&ajaxid="+Math.random(),async:false});
-        htmlobj=$.ajax({url:baseUrl+"/"+encodeURI($("#tac_name").val()+"del"),async:false});
+        htmlobj=$.ajax({url:baseUrl+"/del?tac_id="+tac_id,async:false});
         if (htmlobj.responseText=="1"){
             alert("操作成功");
             tac.list();
@@ -48,7 +48,9 @@ Tac.prototype = {
         kvs += "&key_3="+encodeURI($("#key_3").val())+"&value_3="+encodeURI($("#value_3").val());
         kvs += "&key_4="+encodeURI($("#key_4").val())+"&value_4="+encodeURI($("#value_4").val());
         kvs += "&key_5="+encodeURI($("#key_5").val())+"&value_5="+encodeURI($("#value_5").val());
-        htmlobj=$.ajax({url:baseUrl+"?action=create&module_flag="+$("#module_flag").val()+"&func_flag="+$("#func_flag").val()+"&name="+encodeURI($("#name").val())+"&description="+encodeURI($("#description").val())+kvs+"&ajaxid="+Math.random(),async:false});
+
+        htmlobj=$.ajax({url:baseUrl+"/create?module_flag="+$("#module_flag").val()+"&func_flag="+$("#func_flag").val()+"&name="+encodeURI($("#name").val())+"&description="+encodeURI($("#description").val())+kvs+"&ajaxid="+Math.random(),async:false});
+
         if (htmlobj.responseText=="1"){
             alert("操作成功");
             tac.list();
@@ -61,7 +63,7 @@ Tac.prototype = {
     },
     
     updateinit : function(tac_id){
-        htmlobj=$.ajax({url:baseUrl+"?action=updateinit&module_flag="+$("#module_flag").val()+"&func_flag="+$("#func_flag").val()+"&tac_id="+tac_id+"&ajaxid="+Math.random(),async:false});
+        htmlobj=$.ajax({url:baseUrl+"/updateinit?module_flag="+$("#module_flag").val()+"&func_flag="+$("#func_flag").val()+"&tac_id="+tac_id+"&ajaxid="+Math.random(),async:false});
         $("#tac_update").html(htmlobj.responseText);
         $("#tac_list").hide();
         $("#tac_create").hide();
@@ -78,7 +80,7 @@ Tac.prototype = {
         kvs += "&key_3="+encodeURI($("#key_3").val())+"&value_3="+encodeURI($("#value_3").val());
         kvs += "&key_4="+encodeURI($("#key_4").val())+"&value_4="+encodeURI($("#value_4").val());
         kvs += "&key_5="+encodeURI($("#key_5").val())+"&value_5="+encodeURI($("#value_5").val());
-        htmlobj=$.ajax({url:baseUrl+"?action=update&module_flag="+$("#module_flag").val()+"&func_flag="+$("#func_flag").val()+"&name="+encodeURI($("#name").val())+"&tac_id="+tac_id+"&description="+encodeURI($("#description").val())+kvs+"&ajaxid="+Math.random(),async:false});
+        htmlobj=$.ajax({url:baseUrl+"/update?module_flag="+$("#module_flag").val()+"&func_flag="+$("#func_flag").val()+"&name="+encodeURI($("#name").val())+"&tac_id="+tac_id+"&description="+encodeURI($("#description").val())+kvs+"&ajaxid="+Math.random(),async:false});
         if (htmlobj.responseText=="1"){
             alert("操作成功");
             tac.list();
