@@ -1,11 +1,11 @@
 
-&nbsp;$!description
+&nbsp;{{ description }}
 
-#foreach($se in $data )
+{% for se in data %}
 
     <div class="main_table">
 
-    $!se.de
+        {{ se.de }}
 
     <table width="100%" border="0" cellspacing="0" class="m_table">
 
@@ -13,11 +13,11 @@
 
             <tr>
 
-                #foreach($na in $se.navigation )
+                {% for na in se.navigation %}
 
-                <th align="center">$!na</th>
+                <th align="center">{{ na }}</th>
 
-                #end
+                {% endfor %}
 
             </tr>
 
@@ -25,7 +25,7 @@
 
         <tbody>
 
-            #if($se.data.size()==0)
+            {% if se %}
 
             <tr>
 
@@ -33,30 +33,30 @@
 
             </tr>
 
-            #end
+            {% endif %}
 
-            #foreach($da in $se.data )
+            {% for da in se.data %}
 
             <tr>
 
-                #foreach($d in $da )
+                {% for d in da %}
 
-                <td align="center">$!d</td>
+                <td align="center">{{ d }}</td>
 
-                #end
+                {% endfor %}
 
             </tr>
 
-            #end
+            {% endfor %}
 
         </tbody>
 
     </table>
 
-    $!se.mo
+    {{ se.mo }}
 
     </div>
 
-#end
+{% endif %}
 
-&nbsp;$!more
+&nbsp;{{ more }}
