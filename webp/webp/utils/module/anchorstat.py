@@ -13,8 +13,9 @@ class AnchorStat(object):
     
     @staticmethod
     def search(tac_name, func_flag):
+        print 'searching ...'
         db = DB()
-        sql = strtpl("select a.id,c.name tac_name,d.name user_name,a.dt,a.status,a.description from func_tac_rel a,func b,tac c,user d where a.func_id=b.id and a.taca_id=c.id and a.user_id=d.id and b.flag=$func_flag and c.name like '%$tac_name%' order by a.dt desc").safe_substitute(dict(func_flag=func_flag, tac_name=tac_name))
+        sql = strtpl("select a.id,c.name tac_name,d.name user_name,a.dt,a.status,a.description from func_tac_rel a,func b,tac c,user d where a.func_id=b.id and a.taca_id=c.id and a.user_id=d.id and b.flag='$func_flag' and c.name like '%$tac_name%' order by a.dt desc").safe_substitute(dict(func_flag=func_flag, tac_name=tac_name))
         print 'anchorstat search sql:', sql
         db.execute(sql)
         res = db.fetchall()
@@ -27,10 +28,9 @@ class AnchorStat(object):
                 dt = dt,
                 status = status, 
                 description = description,
-                status_is_1 = status == 1,
-                status_is_m1 = status == -1,
-                status_is_0 = status == 0,
-                )
+                status_is_1 = (status == 1),
+                status_is_m1 = (status == -1),
+                status_is_0 = (status == 0))
             _list.append(keys)
         return _list
 

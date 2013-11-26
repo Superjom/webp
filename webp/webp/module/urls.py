@@ -31,6 +31,10 @@ urlpatterns = patterns('',
 
     url(r'^nonmarked/anchorstat/show', 'webp.module.views.anchorstat.show', name="anchorstat_show"),
 
+    url(r'^nonmarked/anchorstat/createinit', 'webp.module.views.anchorstat.createinit', name="anchorstat_createinit"),
+
+    url(r'^nonmarked/anchorstat/create', 'webp.module.views.anchorstat.create', name="anchorstat_create"),
+
     url(r'^nonmarked/anchorstat', 'webp.module.views.anchorstat.index', name="anchorstat_index"),
 
 )

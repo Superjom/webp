@@ -37,6 +37,7 @@ def index(request):
 
     return render_to_response("html/nonmarked/anchorstat/anchorstat_index.html", dic)
 
+
 def list(request):
     tac_name = request.GET['tac_name']
     func_flag = request.GET['func_flag']
@@ -51,7 +52,8 @@ def list(request):
         'list': _list,
         'func': func,
         })
-    return render_to_response("/html/nonmarked/anchorstat/anchorstat_list.html", dic)
+    return render_to_response("html/nonmarked/anchorstat/anchorstat_list.html")
+
 
 def show(request):
     db = DB()
@@ -171,9 +173,11 @@ def create(request):
     db.commit()
 
     func_tac_id = db.get_value("select id from func_tac_rel where tacb_id is null and func_id=%d and taca_id=%d" % (func_id, tac_id))
+
     log_path = os.path.join(Util.INVLINK_HOME, module_flag,
             func_flag, "log",
             "%s_%s" % (tac.name, Util.get_date() ))
+
     db.execute("insert into func_tac_log(func_tac_id,path,kind) values(%d,'%s',1)" % (func_tac_id, log_path) )
     db.commit()
 
