@@ -24,6 +24,17 @@ from webp.utils.objects import ShowEntity, Tac
 
 def index(request):
     dic = user_utils.user_info_context(request)
+    if not dic: return redirect('/login')
+    user = dic['user']
+
+    module = user.get_module('nonmarked')
+    func = module.get_func('anchorstat')
+    dic.update({
+        'module_flag': module.flag,
+        'func_flag': func.flag,
+        'purview_has_create': 'create' in func.purview,
+        })
+
     return render_to_response("html/nonmarked/anchorstat/anchorstat_index.html", dic)
 
 def list(request):

@@ -25,7 +25,7 @@ function MM_openBrWindow(theURL,winName,features) { //v2.0
         <div>
             <span>{{ module.name }}</span>
             {% for func in module.list %}
-            <a href="module/{{module.flag}}/{{func.flag}}" target="mainFrame">{{func.name}}</a>
+            <a href="{{module.flag}}/{{func.flag}}" target="mainFrame">{{func.name}}</a>
             {% endfor %}
         </div>
     {% endfor %}

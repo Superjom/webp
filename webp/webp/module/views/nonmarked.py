@@ -24,10 +24,11 @@ from webp.utils.objects.Tac import Tac
 
 def tac_index(request):
     dic = user_utils.user_info_context(request)
+    if not dic: return redirect('/login')
     user = dic['user']
+
     module = user.get_module('nonmarked')
     func = module.get_func('nonmarkedtac')
-    if not dic: return redirect('/login')
 
     data = {
         'module_flag': module.flag,

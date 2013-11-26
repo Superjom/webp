@@ -16,6 +16,6 @@ urlpatterns = patterns('',
     url(r'^logout$', logout),
 
     url(r'users/', include('webp.users.urls')),
-    url(r'module/', include('webp.module.urls')),
+    url(r'', include('webp.module.urls')),
 
 )

@@ -10,6 +10,7 @@ Created on 11 21, 2013
 from django.conf.urls import patterns, url
 
 urlpatterns = patterns('',
+    # ------------------------------------ tac ------------------------------------------------
     url(r'^nonmarked/nonmarkedtac$', 'webp.module.views.nonmarked.tac_index', name="tac_index"),
     url(r'^nonmarked/tac/list$', 'webp.module.views.nonmarked.tac_list', name="tac_list"),
     # create
@@ -23,6 +24,14 @@ urlpatterns = patterns('',
     url(r'^nonmarked/tac/updateinit', 'webp.module.views.nonmarked.updateinit', name="tac_updateinit"),
 
     url(r'^nonmarked/tac/update', 'webp.module.views.nonmarked.update', name="tac_update"),
+
+    # ------------------------------------ tac ------------------------------------------------
+    url(r'^nonmarked/anchorstat', 'webp.module.views.anchorstat.index', name="anchorstat_index"),
+
+    url(r'^nonmarked/anchorstat/list', 'webp.module.views.anchorstat.list', name="anchorstat_list"),
+
+    url(r'^nonmarked/anchorstat/show', 'webp.module.views.anchorstat.show', name="anchorstat_show"),
+
 )
 
 

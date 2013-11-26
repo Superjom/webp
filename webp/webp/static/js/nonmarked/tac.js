@@ -1,4 +1,4 @@
-var baseUrl = '/module/nonmarked/tac';
+var baseUrl = '/nonmarked/tac';
 
 function Tac(){};
 
