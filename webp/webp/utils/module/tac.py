@@ -52,8 +52,6 @@ class Tac(object):
         res = db.fetchall()
         _list = []
 
-        print 'res:', res[0], len(res[0])
-
         for id, name, description, dt, \
             key_1, value_1, key_2, value_2, key_3, value_3, \
             key_4, value_4, key_5, value_5, module_name in res:

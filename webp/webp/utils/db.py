@@ -27,6 +27,11 @@ class DB(object):
         res = self.cursor.fetchall()
         return res
 
+    def get_value(self, sql):
+        self.execute(sql)
+        res = self.fetchone()
+        return res
+
 
 if __name__ == "__main__":
     pass

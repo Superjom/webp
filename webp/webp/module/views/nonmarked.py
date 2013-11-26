@@ -64,10 +64,15 @@ def createinit(request):
     module_flag = 'nonmarked'
     module_id = ModuleCtrl.get_id(module_flag)
     db.execute("select key_1, key_2, key_3, key_4, key_5 from tac where module_id=%d order by dt desc limit 0,1" % module_id)
-    res = list(db.fetchall()[0])
-    print 'createinit res:', res
-    keys = res + ["" for i in range(5)]
-    keylist = [keys[i] for i in range(5)]
+    res = db.fetchall()
+
+    if not res:
+        keylist = ["" for i in range(5)]
+    else:
+        res = list(res[0])
+        #print 'createinit res:', res
+        keys = res + ["" for i in range(5)]
+        keylist = [keys[i] for i in range(5)]
     dic.update({
         'keylist': keylist,
         })
