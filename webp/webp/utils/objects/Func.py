@@ -16,6 +16,14 @@ class Func(object):
         self.name = name
         self.purview = purview
 
+    @property
+    def purview_has_create(self):
+        return 'create' in self.purview
+
+    @property
+    def purview_has_delete(self):
+        return 'delete' in self.purview
+
     def __str__(self):
         return '\n'.join([
             '<Func',

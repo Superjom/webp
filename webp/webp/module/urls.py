@@ -26,11 +26,12 @@ urlpatterns = patterns('',
     url(r'^nonmarked/tac/update', 'webp.module.views.nonmarked.update', name="tac_update"),
 
     # ------------------------------------ tac ------------------------------------------------
-    url(r'^nonmarked/anchorstat', 'webp.module.views.anchorstat.index', name="anchorstat_index"),
 
     url(r'^nonmarked/anchorstat/list', 'webp.module.views.anchorstat.list', name="anchorstat_list"),
 
     url(r'^nonmarked/anchorstat/show', 'webp.module.views.anchorstat.show', name="anchorstat_show"),
+
+    url(r'^nonmarked/anchorstat', 'webp.module.views.anchorstat.index', name="anchorstat_index"),
 
 )
 

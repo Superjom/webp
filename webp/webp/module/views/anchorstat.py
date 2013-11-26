@@ -42,7 +42,15 @@ def list(request):
     func_flag = request.GET['func_flag']
     _list = AnchorStatCtrl.search(tac_name, func_flag)
     dic = user_utils.user_info_context(request)
-    dic.update({'list': _list})
+
+    user = dic['user']
+    module = user.get_module('nonmarked')
+    func = module.get_func('anchorstat')
+
+    dic.update({
+        'list': _list,
+        'func': func,
+        })
     return render_to_response("/html/nonmarked/anchorstat/anchorstat_list.html", dic)
 
 def show(request):
@@ -112,8 +120,7 @@ def show(request):
 def createinit(request):
     module_flag = request.GET['module_flag']
     db = DB()
-    db.execute("select id from module where flag='%s'" % module_flag)
-    module_id = db.fetchone()
+    module_id = db.get_value("select id from module where flag='%s'" % module_flag)
     db.execute("select id,name from tac where module_id=%d" % module_id)
     res = db.fetchall()
     _list = []
