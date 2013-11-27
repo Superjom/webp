@@ -22,7 +22,7 @@ from webp.utils.module.module import Module as ModuleCtrl
 from webp.utils.objects.Tac import Tac
 
 
-def tac_index(request):
+def index(request):
     dic = user_utils.user_info_context(request)
     if not dic: return redirect('/login')
     user = dic['user']
@@ -40,7 +40,7 @@ def tac_index(request):
     return render_to_response("html/nonmarked/tac/tac_index.html", dic)
 
 
-def tac_list(request):
+def list(request):
     tac_name = request.GET.get('tagname', '')
     module_id = ModuleCtrl.get_id(flag='nonmarked')
     res = TacCtrl.search(

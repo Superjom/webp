@@ -16,11 +16,12 @@ from django.template import RequestContext
 from django.shortcuts import render, render_to_response, redirect
 
 from webp.utils.db import DB
-from webp.utils import strtpl, Util
+from webp.utils import strtpl, Util, debug_print, _debug_print
 import webp.utils.users as user_utils
 from webp.utils.module.anchorstat import AnchorStat as AnchorStatCtrl
 from webp.utils import filetool
-from webp.utils.objects import ShowEntity, Tac
+from webp.utils.objects.ShowEntity import ShowEntity
+from webp.utils.objects.Tac import Tac
 
 def index(request):
     dic = user_utils.user_info_context(request)
@@ -52,11 +53,12 @@ def list(request):
         'list': _list,
         'func': func,
         })
-    return render_to_response("html/nonmarked/anchorstat/anchorstat_list.html")
+    return render_to_response("html/nonmarked/anchorstat/anchorstat_list.html", dic)
 
 
 def show(request):
     db = DB()
+    dic = user_utils.user_info_context(request)
     module_flag = request.GET['module_flag']
     func_flag = request.GET['func_flag']
     func_tac_id = request.GET['func_tac_id']
@@ -70,7 +72,10 @@ def show(request):
                 module_flag, func_flag,
                 'display', tac_name, 'description')
 
+        _debug_print("des_path: " + des_path)
+
         description = filetool.read(des_path)
+        dic['description'] = description
     except:
         pass
 
@@ -78,7 +83,11 @@ def show(request):
         more_path = os.path.join(
                 Util.INVLINK_HOME, module_flag,
                 func_flag, tac_name, 'more')
+
+        _debug_print("more_path: " + more_path)
+
         more = filetool.read(more_path)
+        dic['more'] = more
     except: 
         pass
 
@@ -118,6 +127,8 @@ def show(request):
     except:
         pass
 
+    return render_to_response("html/nonmarked/anchorstat/anchorstat_show.html", dic)
+
 
 def createinit(request):
     module_flag = request.GET['module_flag']
@@ -134,7 +145,7 @@ def createinit(request):
     dic = user_utils.user_info_context(request)
     dic['tacs'] = _list
 
-    return render_to_response("/html/nonmarked/anchorstat/anchorstat_create.html", dic)
+    return render_to_response("html/nonmarked/anchorstat/anchorstat_create.html", dic)
 
 
 def create(request):
@@ -144,13 +155,16 @@ def create(request):
     module_flag = request.GET['module_flag']
     func_flag = request.GET['func_flag']
     tac_id = int(request.GET['tac_id'])
-    func_id = int(request.GET['func_id'])
+    func_id = db.get_value("select id from func where flag='%s'" % func_flag)
 
     count = db.get_value("select count(*) from func_tac_rel where func_id=%d and taca_id=%d" % (func_id, tac_id))
     if count > 0:
         return HttpResponse("该策略任务已经存在")
 
-    db.execute("select id,name,key_1,value_1,key_2,value_2,key_3,value_3,key_4,value_4,key_5,value_5 from tac where id=%d" % tac_id)
+    sql = "select id,name,key_1,value_1,key_2,value_2,key_3,value_3,key_4,value_4,key_5,value_5 from tac where id=%d" % tac_id
+    _debug_print(sql)
+    db.execute(sql)
+
     res = db.fetchone()
     tac = Tac()
     if res:
@@ -169,16 +183,21 @@ def create(request):
             if  key or value:
                 tac.map[key] = value
 
-    db.execute("insert into func_tac_rel(func_id,taca_id,user_id,status) values(%d,%d,%d,0)" % (func_id, tac_id, user.id))
+    sql = "insert into func_tac_rel(func_id,taca_id,user_id,status) values(%d,%d,%d,0)" % (func_id, tac_id, user.id)
+    _debug_print(sql)
+    db.execute(sql)
     db.commit()
 
-    func_tac_id = db.get_value("select id from func_tac_rel where tacb_id is null and func_id=%d and taca_id=%d" % (func_id, tac_id))
+    sql = "select id from func_tac_rel where tacb_id is null and func_id=%d and taca_id=%d" % (func_id, tac_id)
+    _debug_print(sql)
+    func_tac_id = db.get_value(sql)
 
     log_path = os.path.join(Util.INVLINK_HOME, module_flag,
-            func_flag, "log",
-            "%s_%s" % (tac.name, Util.get_date() ))
+        func_flag, "log", "%s_%s" % (tac.name, Util.get_date() ))
 
-    db.execute("insert into func_tac_log(func_tac_id,path,kind) values(%d,'%s',1)" % (func_tac_id, log_path) )
+    sql = "insert into func_tac_log(func_tac_id,path,kind) values(%d,'%s',1)" % (func_tac_id, log_path) 
+    _debug_print(sql)
+    db.execute(sql)
     db.commit()
 
     shell = [
@@ -200,14 +219,23 @@ def create(request):
     if values: values = values[:-1]
 
     shell += ["-k", keys, "-v", values, "-l", log_path, "-t", '1']
+
+
     try:
         shell = " ".join(shell)
+        _debug_print('shell '+ shell)
         output = os.popen(shell).read()
+        _debug_print('output ' + output)
 
-    except:
-        db.execute("update func_tac_rel set status=-1,description='Interface error' where id=%d" % func_tac_id)
+    except Exception, e:
+
+        _debug_print('e: ' + e)
+        sql = "update func_tac_rel set status=-1,description='Interface error' where id=%d" % func_tac_id
+        _debug_print(sql)
+        db.execute(sql)
         db.commit()
-        pass
+
+    return HttpResponse("1")
 
 
 def create_schedule(request):
@@ -232,7 +260,7 @@ def delete(request):
     db = DB()
     module_flag = request.GET["module_flag"]
     func_flag = request.GET["func_flag"]
-    func_tac_id = request.GET["func_tac_id"]
+    func_tac_id = int(request.GET["func_tac_id"])
     db.execute("select id,name,key_1,value_1,key_2,value_2,key_3,value_3,key_4,value_4,key_5,value_5 from tac where id=(select taca_id from func_tac_rel where id=%d)" % func_tac_id)
     res = db.fetchone()
     tac = Tac()
@@ -299,6 +327,8 @@ def delete(request):
     except:
         db.execute("update func_tac_rel set status=-1,description='Interface error' where id=%d" % func_tac_id)
         db.commit()
+
+    return HttpResponse("1")
 
 
 

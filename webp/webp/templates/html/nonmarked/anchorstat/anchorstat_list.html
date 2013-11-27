@@ -32,6 +32,12 @@
 
             {% for ft in list %}
 
+            <!--
+            <p>ft: {{ft}}</p>
+            <p>purview: {{func.purview}} </p>
+            <p>func: {{func.purview_has_query}} </p>
+            -->
+
             <tr>
 
                 <td width="10%" align="center">{{ forloop.counter }}</td>
@@ -43,7 +49,7 @@
                 <td width="20%" align="center">{{ ft.dt }}</td>
 
                 <td width="10%" align="center">
-                    {% if func.purview_has_create %} <a href="#" onclick="anchorstat.createschedule($ft.id)" style="text-decoration:none"> {% endif %} 
+                    {% if func.purview_has_create %} <a href="#" onclick="anchorstat.createschedule({{ ft.id }})" style="text-decoration:none"> {% endif %} 
 
                         {% if ft.status_is_1 %}
 
@@ -56,15 +62,15 @@
 
                 <td width="20%" align="center">
 
-                    {% if purview.has_query %} 
-                        {% if not ft.status_is_%}  
-                        <a href="#" onclick="anchorstat.show($ft.id)" style="text-decoration:none;color:blue">&nbsp;展示&nbsp;</a> 
+                    {% if func.purview_has_query %} 
+                        {% if not ft.status_is_1 %}  
+                        <a href="#" onclick="anchorstat.show({{ ft.id }})" style="text-decoration:none;color:blue">&nbsp;展示&nbsp;</a> 
                         {% endif %}
                     {% endif %}
 
-                    {% if purview.has_delete %} 
+                    {% if func.purview_has_delete %} 
                         {% if ft.status_is_0 %}
-                        <a href="#" onclick="anchorstat.del($ft.id)" style="text-decoration:none;color:blue">&nbsp;删除&nbsp;</a> 
+                        <a href="#" onclick="anchorstat.del({{ ft.id }})" style="text-decoration:none;color:blue">&nbsp;删除&nbsp;</a> 
                         {% endif %}
                     {% endif %}
 

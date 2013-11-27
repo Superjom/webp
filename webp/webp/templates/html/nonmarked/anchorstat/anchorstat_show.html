@@ -1,5 +1,6 @@
 
-&nbsp;{{ description }}
+&nbsp;
+{{ description }}
 
 {% for se in data %}
 
@@ -15,7 +16,7 @@
 
                 {% for na in se.navigation %}
 
-                <th align="center">{{ na }}</th>
+                <th align="center">$!na</th>
 
                 {% endfor %}
 
@@ -25,7 +26,7 @@
 
         <tbody>
 
-            {% if se %}
+            {% if not se.data %}
 
             <tr>
 
@@ -41,7 +42,7 @@
 
                 {% for d in da %}
 
-                <td align="center">{{ d }}</td>
+                <td align="center">$!d</td>
 
                 {% endfor %}
 
@@ -57,6 +58,7 @@
 
     </div>
 
-{% endif %}
+    {% endfor %}
 
-&nbsp;{{ more }}
+    &nbsp;
+    {{ more }}

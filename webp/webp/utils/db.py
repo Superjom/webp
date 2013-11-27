@@ -17,7 +17,6 @@ class DB(object):
 
     def commit(self):
         transaction.commit_unless_managed()
-        self.cursor.close()
 
     def fetchone(self):
         res = self.cursor.fetchone()
@@ -30,7 +29,11 @@ class DB(object):
     def get_value(self, sql):
         self.execute(sql)
         res = self.fetchone()
-        return res
+        if res:
+            return res[0]
+
+    def __del__(self):
+        self.cursor.close()
 
 
 if __name__ == "__main__":

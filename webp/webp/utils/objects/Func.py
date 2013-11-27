@@ -24,6 +24,11 @@ class Func(object):
     def purview_has_delete(self):
         return 'delete' in self.purview
 
+    @property
+    def purview_has_query(self):
+        return 'query' in self.purview
+
+
     def __str__(self):
         return '\n'.join([
             '<Func',

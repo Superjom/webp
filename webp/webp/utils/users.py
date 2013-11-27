@@ -69,10 +69,8 @@ def user_info_context(request):
     """
     userobject = request.session.get('userobject', None)
 
-    if not userobject:
-        return None
-
-    return {'user' : userobject}
+    if userobject:
+        return {'user' : userobject}
 
 
 def login(request, userid, password):

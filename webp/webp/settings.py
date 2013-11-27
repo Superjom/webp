@@ -137,8 +137,18 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.messages.context_processors.messages'
     )
 
-# session config
-CACHE_BACKEND = 'memcached://127.0.0.1:8091'
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:8081',
+    }
+}
+
+CACHE_BACKEND = 'memcached://localhost:8081/'
 SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
-CACHE_MIDDLEWARE_SECONDS=3000
+
+# set project's environment
+from webp.utils import Util
+Util.set_environment()
+
 
