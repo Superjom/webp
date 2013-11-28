@@ -37,9 +37,12 @@ urlpatterns = patterns('',
 
     url(r'^nonmarked/anchorstat/delete', 'webp.module.views.nonmarked.anchorstat.delete', name="anchorstat_delete"),
 
-    url(r'^nonmarked/anchorstat/createschedule', 'webp.module.views.nonmarked.anchorstat.createschedule', name="anchorstat_createschedule"),
+    url(r'^nonmarked/anchorstat/createschedule', 'webp.module.views.nonmarked.anchorstat.create_schedule', name="anchorstat_create_schedule"),
 
     url(r'^nonmarked/anchorstat', 'webp.module.views.nonmarked.anchorstat.index', name="anchorstat_index"),
+
+    # ------------------------------------ anchorstat ------------------------------------------------
+
 
 
 )

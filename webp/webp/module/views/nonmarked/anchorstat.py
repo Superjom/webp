@@ -158,6 +158,7 @@ def create(request):
     func_id = db.get_value("select id from func where flag='%s'" % func_flag)
 
     count = db.get_value("select count(*) from func_tac_rel where func_id=%d and taca_id=%d" % (func_id, tac_id))
+
     if count > 0:
         return HttpResponse("该策略任务已经存在")
 
