@@ -82,7 +82,7 @@ def show(request):
     try:
         more_path = os.path.join(
                 Util.INVLINK_HOME, module_flag,
-                func_flag, tac_name, 'more')
+                func_flag, 'display', tac_name, 'more')
 
         _debug_print("more_path: " + more_path)
 
@@ -100,7 +100,7 @@ def show(request):
                 os.path.join(
                     Util.INVLINK_HOME,
                     module_flag, func_flag,
-                    'display', 'tac_name',
+                    'display', tac_name,
                     'info_%d' % k))
             try:
                 de = filetool.read( os.path.join(
@@ -194,7 +194,7 @@ def create(request):
     func_tac_id = db.get_value(sql)
 
     log_path = os.path.join(Util.INVLINK_HOME, module_flag,
-        func_flag, "log", "%s_%s" % (tac.name, Util.get_date() ))
+        func_flag, "log", "%s_%s.log" % (tac.name, Util.get_date() ))
 
     sql = "insert into func_tac_log(func_tac_id,path,kind) values(%d,'%s',1)" % (func_tac_id, log_path) 
     _debug_print(sql)

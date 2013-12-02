@@ -1,38 +1,76 @@
+
 <form name="linkfunctionCreateForm" onsubmit="linkfunction.create();return false;">
+
 <div class="main_table">
-	<table class="m_table" width="100%" border="0" cellspacing="0">
-		<thead>
-			<tr>
-				<th align="left"><img src="/images/sub_func.gif"
-					align="absmiddle" /> <span>¥¥Ω®»ŒŒÒ</span></th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>
-					<table bgcolor="#F0F8E2" width="100%" border="0" cellpadding="6"
-						cellspacing="1">
-						<tr>
-							<td width="25%"></td>
-							<td width="20%" align="right">≤ﬂ¬‘</td>
-							<td width="20%" align="left">
-							#if($tacs.size()==0)
-							<font color="red">µ±«∞Œﬁ≤ﬂ¬‘£¨«Îœ»¥¥Ω®≤ﬂ¬‘£°</font>
-							#end
-							#foreach($tac in $tacs )
-							<input type="radio" name="tac" value="$tac.id" type="text" />$!tac.name
-							#end
-							</td>
-							<td align="left" id="info_1" style="color: red"></td>
-						</tr>
-					</table>
-					<div class="form_control">
-						<input name="submit1" type="submit" class="but_01" value="Ã·Ωª" />
-						<input name="submit2" type="button" onclick="linkfunction.list()" class="but_01" value="∑µªÿ" />
-					</div>
-				</td>
-			</tr>
-		</tbody>
-	</table>
+
+    <table class="m_table" width="100%" border="0" cellspacing="0">
+
+        <thead>
+
+            <tr>
+
+                <th align="left"><img src="/static/images/sub_func.gif"
+
+                    align="absmiddle" /> <span>ÂàõÂª∫‰ªªÂä°</span></th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr>
+
+                <td>
+
+                    <table bgcolor="#F0F8E2" width="100%" border="0" cellpadding="6"
+
+                        cellspacing="1">
+
+                        <tr>
+
+                            <td width="25%"></td>
+
+                            <td width="20%" align="right">Á≠ñÁï•</td>
+
+                            <td width="20%" align="left">
+
+                            {% if not tacs %}
+
+                            <font color="red">ÂΩìÂâçÊó†Á≠ñÁï•ÔºåËØ∑ÂÖàÂàõÂª∫Á≠ñÁï•ÔºÅ</font>
+
+                            {% endif %}
+
+                            {% for tac in tacs %}
+
+                            <input type="radio" name="tac" value="{{ tac.id }}" type="text" />{{ tac.name }}
+
+                            {% endfor %}
+
+                            </td>
+
+                            <td align="left" id="info_1" style="color: red"></td>
+
+                        </tr>
+
+                    </table>
+
+                    <div class="form_control">
+
+                        <input name="submit1" type="submit" class="but_01" value="Êèê‰∫§" />
+
+                        <input name="submit2" type="button" onclick="linkfunction.list()" class="but_01" value="ËøîÂõû" />
+
+                    </div>
+
+                </td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
 </div>
+
 </form>

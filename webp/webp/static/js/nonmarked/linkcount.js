@@ -1,82 +1,82 @@
 var baseUrl = '/nonmarked/linkcount';
 
-function LinkCount(){};
+function Anchorstat(){};
 
-LinkCount.prototype = {
-	list : function(){
-		htmlobj=$.ajax({url:baseUrl+"?action=list&module_flag="+$("#module_flag").val()+"&func_flag="+$("#func_flag").val()+"&tac_name="+encodeURI($("#tac_name").val())+"&ajaxid="+Math.random(),async:false});
-		$("#linkcount_list").html(htmlobj.responseText);
-		$("#linkcount_show").hide();
-		$("#linkcount_create").hide();
-		$("#linkcount_createschedule").hide();
-		$("#linkcount_list").show();
-		
-	},
+Anchorstat.prototype = {
+    list : function(){
+        htmlobj=$.ajax({url:baseUrl+"/list?module_flag="+$("#module_flag").val()+"&func_flag="+$("#func_flag").val()+"&tac_name="+encodeURI($("#tac_name").val())+"&ajaxid="+Math.random(),async:false});
+        $("#linkcount_list").html(htmlobj.responseText);
+        $("#linkcount_show").hide();
+        $("#linkcount_create").hide();
+        $("#linkcount_createschedule").hide();
+        $("#linkcount_list").show();
+        
+    },
 
-	show : function(func_tac_id){
-		htmlobj=$.ajax({url:baseUrl+"?action=show&module_flag="+$("#module_flag").val()+"&func_flag="+$("#func_flag").val()+"&func_tac_id="+func_tac_id+"&ajaxid="+Math.random(),async:false});
-		$("#linkcount_show").html(htmlobj.responseText);
-		$("#linkcount_create").hide();
-		$("#linkcount_createschedule").hide();
-		$("#linkcount_list").show();
-		$("#linkcount_show").show();
-	},
-	
-	del : function(func_tac_id){
-		if(!confirm("ÄúÈ·¶¨É¾³ıÂğ£¿")){
-			return;
-		}
-		htmlobj=$.ajax({url:baseUrl+"?action=delete&module_flag="+$("#module_flag").val()+"&func_flag="+$("#func_flag").val()+"&func_tac_id="+func_tac_id+"&ajaxid="+Math.random(),async:false});
-		if (htmlobj.responseText=="1"){
-			alert("²Ù×÷³É¹¦");
-			linkcount.list();
-		}else if(htmlobj.responseText=="0"){
-			alert("²Ù×÷Ê§°Ü");
-			linkcount.list();
-		}else{
-			alert(htmlobj.responseText);
-		}
-	},
-	
-	createinit : function(){
-		htmlobj=$.ajax({url:baseUrl+"?action=createinit&module_flag="+$("#module_flag").val()+"&func_flag="+$("#func_flag").val()+"&ajaxid="+Math.random(),async:false});
-		$("#linkcount_create").html(htmlobj.responseText);
-		$("#linkcount_list").hide();
-		$("#linkcount_show").hide();
-		$("#linkcount_createschedule").hide();
-		$("#linkcount_create").show();
-	},
-	
-	create : function(){
-		tac_id=$("input[name='tac']:checked").val();
-		if(typeof(tac_id)=="undefined"){
-			$("#info_1").html("ÇëÑ¡Ôñ²ßÂÔ");
-			return;
-		}
-		htmlobj=$.ajax({url:baseUrl+"?action=create&module_flag="+$("#module_flag").val()+"&func_flag="+$("#func_flag").val()+"&tac_id="+tac_id+"&ajaxid="+Math.random(),async:false});
-		if (htmlobj.responseText=="1"){
-			alert("²Ù×÷³É¹¦");
-			linkcount.list();
-		}else if(htmlobj.responseText=="0"){
-			alert("²Ù×÷Ê§°Ü");
-			linkcount.list();
-		}else{
-			alert(htmlobj.responseText);
-		}
-	},
-	
-	createschedule : function(func_tac_id){
-		htmlobj=$.ajax({url:baseUrl+"?action=createschedule&module_flag="+$("#module_flag").val()+"&func_flag="+$("#func_flag").val()+"&func_tac_id="+func_tac_id+"&ajaxid="+Math.random(),async:false});
-		$("#linkcount_createschedule").html(htmlobj.responseText);
-		$("#linkcount_show").hide();
-		$("#linkcount_create").hide();
-		$("#linkcount_list").show();
-		$("#linkcount_createschedule").show();
-	}
+    show : function(func_tac_id){
+        htmlobj=$.ajax({url:baseUrl+"/show?module_flag="+$("#module_flag").val()+"&func_flag="+$("#func_flag").val()+"&func_tac_id="+func_tac_id+"&ajaxid="+Math.random(),async:false});
+        $("#linkcount_show").html(htmlobj.responseText);
+        $("#linkcount_create").hide();
+        $("#linkcount_createschedule").hide();
+        $("#linkcount_list").show();
+        $("#linkcount_show").show();
+    },
+    
+    del : function(func_tac_id){
+        if(!confirm("æ‚¨ç¡®å®šåˆ é™¤å—ï¼Ÿ")){
+            return;
+        }
+        htmlobj=$.ajax({url:baseUrl+"/delete?module_flag="+$("#module_flag").val()+"&func_flag="+$("#func_flag").val()+"&func_tac_id="+func_tac_id+"&ajaxid="+Math.random(),async:false});
+        if (htmlobj.responseText=="1"){
+            alert("æ“ä½œæˆåŠŸ");
+            linkcount.list();
+        }else if(htmlobj.responseText=="0"){
+            alert("æ“ä½œå¤±è´¥");
+            linkcount.list();
+        }else{
+            alert(htmlobj.responseText);
+        }
+    },
+    
+    createinit : function(){
+        htmlobj=$.ajax({url:baseUrl+"/createinit?module_flag="+$("#module_flag").val()+"&func_flag="+$("#func_flag").val()+"&ajaxid="+Math.random(),async:false});
+        $("#linkcount_create").html(htmlobj.responseText);
+        $("#linkcount_list").hide();
+        $("#linkcount_show").hide();
+        $("#linkcount_createschedule").hide();
+        $("#linkcount_create").show();
+    },
+    
+    create : function(){
+        tac_id=$("input[name='tac']:checked").val();
+        if(typeof(tac_id)=="undefined"){
+            $("#info_1").html("è¯·é€‰æ‹©ç­–ç•¥");
+            return;
+        }
+        htmlobj=$.ajax({url:baseUrl+"/create?module_flag="+$("#module_flag").val()+"&func_flag="+$("#func_flag").val()+"&tac_id="+tac_id+"&ajaxid="+Math.random(),async:false});
+        if (htmlobj.responseText=="1"){
+            alert("æ“ä½œæˆåŠŸ");
+            linkcount.list();
+        }else if(htmlobj.responseText=="0"){
+            alert("æ“ä½œå¤±è´¥");
+            linkcount.list();
+        }else{
+            alert(htmlobj.responseText);
+        }
+    },
+    
+    createschedule : function(func_tac_id){
+        htmlobj=$.ajax({url:baseUrl+"/createschedule?module_flag="+$("#module_flag").val()+"&func_flag="+$("#func_flag").val()+"&func_tac_id="+func_tac_id+"&ajaxid="+Math.random(),async:false});
+        $("#linkcount_createschedule").html(htmlobj.responseText);
+        $("#linkcount_show").hide();
+        $("#linkcount_create").hide();
+        $("#linkcount_list").show();
+        $("#linkcount_createschedule").show();
+    }
 };
 
 var linkcount = null;
 $(document).ready(function(){
-	linkcount = new LinkCount();
-	linkcount.list();
+    linkcount = new Anchorstat();
+    linkcount.list();
 });

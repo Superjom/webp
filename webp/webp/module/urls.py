@@ -41,7 +41,66 @@ urlpatterns = patterns('',
 
     url(r'^nonmarked/anchorstat', 'webp.module.views.nonmarked.anchorstat.index', name="anchorstat_index"),
 
-    # ------------------------------------ anchorstat ------------------------------------------------
+    # ------------------------------------ fieldstat ------------------------------------------------
+    url(r'^nonmarked/fieldstat/list', 'webp.module.views.nonmarked.fieldstat.list', name="fieldstat_list"),
+
+    url(r'^nonmarked/fieldstat/show', 'webp.module.views.nonmarked.fieldstat.show', name="fieldstat_show"),
+
+    url(r'^nonmarked/fieldstat/createinit', 'webp.module.views.nonmarked.fieldstat.createinit', name="fieldstat_createinit"),
+
+    url(r'^nonmarked/fieldstat/create', 'webp.module.views.nonmarked.fieldstat.create', name="fieldstat_create"),
+
+    url(r'^nonmarked/fieldstat/delete', 'webp.module.views.nonmarked.fieldstat.delete', name="fieldstat_delete"),
+
+    url(r'^nonmarked/fieldstat/createschedule', 'webp.module.views.nonmarked.fieldstat.create_schedule', name="fieldstat_create_schedule"),
+
+    url(r'^nonmarked/fieldstat', 'webp.module.views.nonmarked.fieldstat.index', name="fieldstat_index"),
+
+    # ------------------------------------ linkcount ------------------------------------------------
+    url(r'^nonmarked/linkcount/list', 'webp.module.views.nonmarked.linkcount.list', name="linkcount_list"),
+
+    url(r'^nonmarked/linkcount/show', 'webp.module.views.nonmarked.linkcount.show', name="linkcount_show"),
+
+    url(r'^nonmarked/linkcount/createinit', 'webp.module.views.nonmarked.linkcount.createinit', name="linkcount_createinit"),
+
+    url(r'^nonmarked/linkcount/create', 'webp.module.views.nonmarked.linkcount.create', name="linkcount_create"),
+
+    url(r'^nonmarked/linkcount/delete', 'webp.module.views.nonmarked.linkcount.delete', name="linkcount_delete"),
+
+    url(r'^nonmarked/linkcount/createschedule', 'webp.module.views.nonmarked.linkcount.create_schedule', name="linkcount_create_schedule"),
+
+    url(r'^nonmarked/linkcount', 'webp.module.views.nonmarked.linkcount.index', name="linkcount_index"),
+
+    # ------------------------------------ linkfunction ------------------------------------------------
+    url(r'^nonmarked/linkfunction/list', 'webp.module.views.nonmarked.linkfunction.list', name="linkfunction_list"),
+
+    url(r'^nonmarked/linkfunction/show', 'webp.module.views.nonmarked.linkfunction.show', name="linkfunction_show"),
+
+    url(r'^nonmarked/linkfunction/createinit', 'webp.module.views.nonmarked.linkfunction.createinit', name="linkfunction_createinit"),
+
+    url(r'^nonmarked/linkfunction/create', 'webp.module.views.nonmarked.linkfunction.create', name="linkfunction_create"),
+
+    url(r'^nonmarked/linkfunction/delete', 'webp.module.views.nonmarked.linkfunction.delete', name="linkfunction_delete"),
+
+    url(r'^nonmarked/linkfunction/createschedule', 'webp.module.views.nonmarked.linkfunction.create_schedule', name="linkfunction_create_schedule"),
+
+    url(r'^nonmarked/linkfunction', 'webp.module.views.nonmarked.linkfunction.index', name="linkfunction_index"),
+
+    # ------------------------------------ pp ------------------------------------------------
+    url(r'^nonmarked/pp/list', 'webp.module.views.nonmarked.pp.list', name="pp_list"),
+
+    url(r'^nonmarked/pp/show', 'webp.module.views.nonmarked.pp.show', name="pp_show"),
+
+    url(r'^nonmarked/pp/createinit', 'webp.module.views.nonmarked.pp.createinit', name="pp_createinit"),
+
+    url(r'^nonmarked/pp/create', 'webp.module.views.nonmarked.pp.create', name="pp_create"),
+
+    url(r'^nonmarked/pp/delete', 'webp.module.views.nonmarked.pp.delete', name="pp_delete"),
+
+    url(r'^nonmarked/pp/createschedule', 'webp.module.views.nonmarked.pp.create_schedule', name="pp_create_schedule"),
+
+    url(r'^nonmarked/pp', 'webp.module.views.nonmarked.pp.index', name="pp_index"),
+
 
 
 
