@@ -190,7 +190,7 @@ def create(request):
     db.exe_commit(sql)
 
     res = shell.execute()
-    
+
     if res:
         return HttpResponse('1')
     else:
@@ -246,11 +246,9 @@ def delete(request):
     db.exe_commit("insert into func_tac_log(func_tac_id,path,kind) values(%d,'%s',0)" % (func_tac_id, log_path))
 
     res = shell.execute()
-    if res:
-        return HttpResponse("1")
-    else:
+    if not res:
         db.exe_commit("update func_tac_rel set status=-1,description='Interface error' where id=%d" % func_tac_id)
-
+    return HttpResponse("1")
 
 
 if __name__ == "__main__":

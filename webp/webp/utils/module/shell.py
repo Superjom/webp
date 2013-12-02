@@ -26,11 +26,9 @@ class Shell(object):
 
     def execute(self):
         shell = self.gen_command()
-        try:
-            output = os.popen(shell).read()
-            return output
-        except:
-            pass
+        output = os.popen(shell).read()
+        _debug_print('shell output: ' + output)
+        return True, output
 
     def gen_command(self):
         shell = [
@@ -43,8 +41,9 @@ class Shell(object):
             "-l", self.log_path,
             ]
 
-        if not 'k' in self.args or 'v' in self.args:
+        if not 'k' in self.args and 'v' in self.args:
             raise Exception("error, shell command have no k/v attributes.")
+
         shell += ["-k", self.args['k'], "-v", self.args['v'] ]
 
         if 'x' in self.args and 'y' in self.args:
@@ -55,6 +54,7 @@ class Shell(object):
         shell = ' '.join([str(cmd) for cmd in shell])
 
         _debug_print('shell: ' + shell)
+        return shell
 
     def gen_log_path(self):
         log_path = os.path.join(

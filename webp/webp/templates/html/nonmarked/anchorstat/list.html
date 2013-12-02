@@ -63,13 +63,13 @@
                 <td width="20%" align="center">
 
                     {% if func.purview_has_query %} 
-                        {% if not ft.status_is_1 %}  
+                        {% if ft.status_is_1 %}  
                         <a href="#" onclick="anchorstat.show({{ ft.id }})" style="text-decoration:none;color:blue">&nbsp;展示&nbsp;</a> 
                         {% endif %}
                     {% endif %}
 
                     {% if func.purview_has_delete %} 
-                        {% if ft.status_is_0 %}
+                        {% if not ft.status_is_0 %}
                         <a href="#" onclick="anchorstat.del({{ ft.id }})" style="text-decoration:none;color:blue">&nbsp;删除&nbsp;</a> 
                         {% endif %}
                     {% endif %}

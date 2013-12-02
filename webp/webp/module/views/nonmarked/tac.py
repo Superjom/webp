@@ -21,6 +21,8 @@ from webp.utils.module.tac import Tac as TacCtrl
 from webp.utils.module.module import Module as ModuleCtrl
 from webp.utils.objects.Tac import Tac
 
+List = list
+
 
 def index(request):
     dic = user_utils.user_info_context(request)
@@ -70,7 +72,7 @@ def createinit(request):
     if not res:
         keylist = ["" for i in range(5)]
     else:
-        res = list(res[0])
+        res = List(res[0])
         #print 'createinit res:', res
         keys = res + ["" for i in range(5)]
         keylist = [keys[i] for i in range(5)]

@@ -86,7 +86,7 @@ urlpatterns = patterns('',
 
     url(r'^nonmarked/linkfunction', 'webp.module.views.nonmarked.linkfunction.index', name="linkfunction_index"),
 
-    # ------------------------------------ fieldcase ------------------------------------------------
+    # ------------------------------------ pp ------------------------------------------------
     url(r'^nonmarked/pp/list', 'webp.module.views.nonmarked.pp.list', name="pp_list"),
 
     url(r'^nonmarked/pp/show', 'webp.module.views.nonmarked.pp.show', name="pp_show"),
@@ -115,6 +115,21 @@ urlpatterns = patterns('',
     url(r'^nonmarked/fieldcase/create', 'webp.module.views.nonmarked.fieldcase.create', name="fieldcase_create"),
 
     url(r'^nonmarked/fieldcase$', 'webp.module.views.nonmarked.fieldcase.index', name="fieldcase_index"),
+
+    # ------------------------------------ googlepr ----------------------------------------------
+    url(r'^nonmarked/googlepr/list', 'webp.module.views.nonmarked.googlepr.list', name="googlepr_list"),
+
+    url(r'^nonmarked/googlepr/show', 'webp.module.views.nonmarked.googlepr.show', name="googlepr_show"),
+
+    url(r'^nonmarked/googlepr/createinit', 'webp.module.views.nonmarked.googlepr.createinit', name="googlepr_createinit"),
+
+    url(r'^nonmarked/googlepr/createschedule', 'webp.module.views.nonmarked.googlepr.create_schedule', name="googlepr_create_schedule"),
+
+    url(r'^nonmarked/googlepr/delete', 'webp.module.views.nonmarked.googlepr.delete', name="googlepr_delete"),
+
+    url(r'^nonmarked/googlepr/create', 'webp.module.views.nonmarked.googlepr.create', name="googlepr_create"),
+
+    url(r'^nonmarked/googlepr$', 'webp.module.views.nonmarked.googlepr.index', name="googlepr_index"),
 )
 
 

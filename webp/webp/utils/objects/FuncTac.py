@@ -18,10 +18,22 @@ class FuncTac(object):
         self.status = status
         self.description = description
 
+    @property
+    def status_is_1(self):
+        return self.status == 1
+
+    @property
+    def status_is_m1(self):
+        return self.status == -1
+
+    @property
+    def status_is_0(self):
+        return self.status == 0
+
     def __str__(self):
 
         return '\n'.join([
-            "<FuncTac "
+            "<uncTac "
             "   id:\t%s" % self.id,
             "   taca_name:\t%s" % self.taca_name,
             "   tacb_name:\t%s" % self.tacb_name,

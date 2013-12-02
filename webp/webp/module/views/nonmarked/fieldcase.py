@@ -274,11 +274,10 @@ def delete(request):
 
     res = shell.execute()
 
-    if res:
-        return HttpResponse('1')
-    else:
+    if not res:
         db.exe_commit("update func_tac_rel set status=-1,description='Interface error' where id=%d" % func_tac_id)
 
+    return HttpResponse('1')
 
 
 if __name__ == "__main__":

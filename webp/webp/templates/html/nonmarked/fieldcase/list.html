@@ -48,7 +48,7 @@
                 <td width="17%" align="center">{{ ft.dt }}</td>
 
                 <td width="10%" align="center">
-                    {% if func.purview_has_create %} <a href="#" onclick="anchorstat.createschedule({{ ft.id }})" style="text-decoration:none"> {% endif %} 
+                    {% if func.purview_has_create %} <a href="#" onclick="fieldcase.createschedule({{ ft.id }})" style="text-decoration:none"> {% endif %} 
 
                         {% if ft.status_is_1 %}
 
@@ -56,18 +56,19 @@
                             {% elif ft.status_is_m1 %} <font color="red">失败[{{ ft.description }}</font> 
                             {% elif ft.status_is_0 %} <font color="green">运行中</font> 
                         {% endif %} 
+
                     {% if func.purview_have_create %} </a> {% endif %}
                 </td>
                 <td width="17%" align="center">
 
                     {% if func.purview_has_query %} 
-                        {% if not ft.status_is_1 %}  
+                        {% if ft.status_is_1 %}  
                         <a href="#" onclick="fieldcase.show({{ ft.id }})" style="text-decoration:none;color:blue">&nbsp;展示&nbsp;</a> 
                         {% endif %}
                     {% endif %}
 
                     {% if func.purview_has_delete %} 
-                        {% if ft.status_is_0 %}
+                        {% if not ft.status_is_0 %}
                         <a href="#" onclick="fieldcase.del({{ ft.id }})" style="text-decoration:none;color:blue">&nbsp;删除&nbsp;</a> 
                         {% endif %}
                     {% endif %}
