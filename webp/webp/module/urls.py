@@ -27,19 +27,19 @@ urlpatterns = patterns('',
 
     # ------------------------------------ anchorstat ------------------------------------------------
 
-    url(r'^nonmarked/anchorstat/list', 'webp.module.views.nonmarked.anchorstat.list', name="anchorstat_list"),
+    url(r'^nonmarked/anchorstat/list?.*', 'webp.module.views.nonmarked.anchorstat.list', name="anchorstat_list"),
 
-    url(r'^nonmarked/anchorstat/show', 'webp.module.views.nonmarked.anchorstat.show', name="anchorstat_show"),
+    url(r'^nonmarked/anchorstat/show?.*', 'webp.module.views.nonmarked.anchorstat.show', name="anchorstat_show"),
 
-    url(r'^nonmarked/anchorstat/createinit', 'webp.module.views.nonmarked.anchorstat.createinit', name="anchorstat_createinit"),
+    url(r'^nonmarked/anchorstat/createinit?.*', 'webp.module.views.nonmarked.anchorstat.createinit', name="anchorstat_createinit"),
 
-    url(r'^nonmarked/anchorstat/create', 'webp.module.views.nonmarked.anchorstat.create', name="anchorstat_create"),
+    url(r'^nonmarked/anchorstat/delete?.*', 'webp.module.views.nonmarked.anchorstat.delete', name="anchorstat_delete"),
 
-    url(r'^nonmarked/anchorstat/delete', 'webp.module.views.nonmarked.anchorstat.delete', name="anchorstat_delete"),
+    url(r'^nonmarked/anchorstat/createschedule?.*', 'webp.module.views.nonmarked.anchorstat.create_schedule', name="anchorstat_create_schedule"),
 
-    url(r'^nonmarked/anchorstat/createschedule', 'webp.module.views.nonmarked.anchorstat.create_schedule', name="anchorstat_create_schedule"),
+    url(r'^nonmarked/anchorstat/create?.*', 'webp.module.views.nonmarked.anchorstat.create', name="anchorstat_create"),
 
-    url(r'^nonmarked/anchorstat', 'webp.module.views.nonmarked.anchorstat.index', name="anchorstat_index"),
+    url(r'^nonmarked/anchorstat?.*', 'webp.module.views.nonmarked.anchorstat.index', name="anchorstat_index"),
 
     # ------------------------------------ fieldstat ------------------------------------------------
     url(r'^nonmarked/fieldstat/list', 'webp.module.views.nonmarked.fieldstat.list', name="fieldstat_list"),
@@ -86,7 +86,7 @@ urlpatterns = patterns('',
 
     url(r'^nonmarked/linkfunction', 'webp.module.views.nonmarked.linkfunction.index', name="linkfunction_index"),
 
-    # ------------------------------------ pp ------------------------------------------------
+    # ------------------------------------ fieldcase ------------------------------------------------
     url(r'^nonmarked/pp/list', 'webp.module.views.nonmarked.pp.list', name="pp_list"),
 
     url(r'^nonmarked/pp/show', 'webp.module.views.nonmarked.pp.show', name="pp_show"),
@@ -101,9 +101,20 @@ urlpatterns = patterns('',
 
     url(r'^nonmarked/pp', 'webp.module.views.nonmarked.pp.index', name="pp_index"),
 
+    # ------------------------------------ fieldcase ----------------------------------------------
+    url(r'^nonmarked/fieldcase/list', 'webp.module.views.nonmarked.fieldcase.list', name="fieldcase_list"),
 
+    url(r'^nonmarked/fieldcase/show', 'webp.module.views.nonmarked.fieldcase.show', name="fieldcase_show"),
 
+    url(r'^nonmarked/fieldcase/createinit', 'webp.module.views.nonmarked.fieldcase.createinit', name="fieldcase_createinit"),
 
+    url(r'^nonmarked/fieldcase/createschedule', 'webp.module.views.nonmarked.fieldcase.create_schedule', name="fieldcase_create_schedule"),
+
+    url(r'^nonmarked/fieldcase/delete', 'webp.module.views.nonmarked.fieldcase.delete', name="fieldcase_delete"),
+
+    url(r'^nonmarked/fieldcase/create', 'webp.module.views.nonmarked.fieldcase.create', name="fieldcase_create"),
+
+    url(r'^nonmarked/fieldcase$', 'webp.module.views.nonmarked.fieldcase.index', name="fieldcase_index"),
 )
 
 

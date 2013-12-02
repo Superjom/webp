@@ -7,7 +7,7 @@ Created on 11 25, 2013
 @mail:  yanchunwei@outlook.com
 '''
 
-class FuncTag(object):
+class FuncTac(object):
     def __init__(self, id=None, taca_name=None, tacb_name=None, user_name=None, dt=None, 
                     status=None, description=None):
         self.id = id
@@ -17,6 +17,20 @@ class FuncTag(object):
         self.dt = dt
         self.status = status
         self.description = description
+
+    def __str__(self):
+
+        return '\n'.join([
+            "<FuncTac "
+            "   id:\t%s" % self.id,
+            "   taca_name:\t%s" % self.taca_name,
+            "   tacb_name:\t%s" % self.tacb_name,
+            "   user_name:\t%s" % self.user_name,
+            "   dt:\t%s" % self.dt,
+            "   status:\t%s" % self.status,
+            "   description:\t%s" % self.description,
+            ">",
+            ])
 
 
 

@@ -14,14 +14,15 @@ from django.shortcuts import render, render_to_response
 from django.http import HttpResponse
 from django.template import RequestContext
 from django.shortcuts import render, render_to_response, redirect
-
 from webp.utils.db import DB
-from webp.utils import strtpl, Util, debug_print, _debug_print, filetool, DictProperty
+from webp.utils import strtpl, Util, debug_print, _debug_print
 from webp.utils.module.shell import Shell
+import webp.utils.users as user_utils
+from webp.utils import filetool
 from webp.utils.objects.ShowEntity import ShowEntity
 from webp.utils.objects.Tac import Tac
 from webp.utils.objects.FuncTac import FuncTac
-import webp.utils.users as user_utils
+
 
 def index(request):
     dic = user_utils.user_info_context(request)
@@ -29,21 +30,22 @@ def index(request):
     user = dic['user']
 
     module = user.get_module('nonmarked')
-    func = module.get_func('fieldcase')
+    func = module.get_func('googlepr')
     dic.update({
         'module_flag': module.flag,
         'func_flag': func.flag,
         'purview_has_create': 'create' in func.purview,
         })
 
-    return render_to_response("html/nonmarked/fieldcase/index.html", dic)
+    return render_to_response("html/nonmarked/googlepr/index.html", dic)
 
 
 def list(request):
     db = DB()
     tac_name = request.GET['tac_name']
     func_flag = request.GET['func_flag']
-    sql = strtpl("select a.id,c.name taca_name,d.name tacb_name,e.name user_name,a.dt,a.status,a.description from func_tac_rel a,func b,tac c,tac d,user e where a.func_id=b.id and a.taca_id=c.id and a.tacb_id=d.id and a.user_id=e.id and b.flag='$func_flag' and (c.name like '%$tac_name%' or d.name like '%$tac_name%') order by a.dt desc").substitute(
+    sql = strtpl("select a.id,c.name taca_name,d.name tacb_name,e.name user_name,a.dt,a.status,a.description from func_tac_rel a left join func b on a.func_id=b.id left join tac c on a.taca_id=c.id left join tac d on a.tacb_id=d.id left join user e on a.user_id=e.id where b.flag='$func_flag' and (c.name like '%$tac_name%' or d.name like '%$tac_name%') order by a.dt desc"
+        ).substitute(
             tac_name = tac_name,
             func_flag = func_flag)
 
@@ -65,13 +67,13 @@ def list(request):
 
     user = dic['user']
     module = user.get_module('nonmarked')
-    func = module.get_func('fieldcase')
+    func = module.get_func('googlepr')
 
     dic.update({
         'func': func,
         'list': _list,
         })
-    return render_to_response("html/nonmarked/fieldcase/list.html", dic)
+    return render_to_response("html/nonmarked/googlepr/list.html", dic)
 
 
 def show(request):
@@ -81,10 +83,12 @@ def show(request):
     dic = user_utils.user_info_context(request)
 
     db = DB()
-    sql = strtpl("select c.name taca_name,d.name tacb_name from func_tac_rel a,func b,tac c,tac d where a.func_id=b.id and a.taca_id=c.id and a.tacb_id=d.id and a.id=$func_tac_id").substitute(func_tac_id = func_tac_id)
+    sql = strtpl("select c.name taca_name,d.name tacb_name from func_tac_rel a join func b on a.func_id=b.id join tac c on a.taca_id=c.id left join tac d on a.tacb_id=d.id where a.id=$func_tac_id").substitute(func_tac_id = func_tac_id)
     db.execute(sql)
     taca_name, tacb_name = db.fetchone()
-    tac_name = "%s_%s" % (taca_name, tacb_name)
+    tac_name = taca_name
+    if tacb_name:
+        tac_name += "_" + tacb_name
 
     try:
         des_path = os.path.join(
@@ -148,7 +152,7 @@ def show(request):
     except:
         pass
 
-    return render_to_response("html/nonmarked/fieldcase/show.html", dic)
+    return render_to_response("html/nonmarked/googlepr/show.html", dic)
 
 
 def createinit(request):
@@ -166,7 +170,7 @@ def createinit(request):
     dic = user_utils.user_info_context(request)
     dic['tacs'] = _list
 
-    return render_to_response("html/nonmarked/fieldcase/create.html", dic)
+    return render_to_response("html/nonmarked/googlepr/create.html", dic)
 
 
 def create(request):
@@ -176,36 +180,45 @@ def create(request):
     module_flag = request.GET['module_flag']
     func_flag = request.GET['func_flag']
     taca_id = int(request.GET['taca_id'])
-    tacb_id = int(request.GET['tacb_id'])
+    try:
+        tacb_id = int(request.GET['tacb_id'])
+    except:
+        tacb_id = 0
+
     func_id = db.get_value("select id from func where flag='%s'" % func_flag)
+
     count = db.get_value("select count(*) from func_tac_rel where func_id=%d and taca_id=%d and tacb_id=%d" % (func_id, taca_id, tacb_id))
 
-    if count > 0: return HttpResponse("该策略任务已经存在")
+    if count > 0:
+        return HttpResponse("该策略任务已经存在")
 
-    taca = Tac.from_db(id=taca_id)
-    tacb = Tac.from_db(id=tacb_id)
+    taca = Tac.from_db(taca_id)
+    tacb = Tac.from_db(tacb_id) if tacb_id != 0 else None
 
-    sql = "insert into func_tac_rel(func_id,taca_id,tacb_id,user_id,status) values(%d,%d,%d,%d,0)" % (func_id, taca_id, tacb_id, user.id)
-    _debug_print(sql)
+    if tacb_id != 0:
+        count = db.get_value("select count(*) from func_tac_rel where func_id=$func_id and taca_id in ($taca_id,$tacb_id) and status=1 and tacb_id is null")
+        if count < 2: return HttpResponse("单个策略的统计数据尚未生成")
+        sql = "insert into func_tac_rel(func_id,taca_id,tacb_id,user_id,status) values(%d,%d,%d,%d,0)" % (func_id, taca_id, tacb_id, user.id)
+
+    else:
+        sql = "insert into func_tac_rel(func_id,taca_id,user_id,status) values(%d,%d,%d,0)" % (func_id, taca_id, user.id)
+
+    _debug_print("sql: " + sql)
     db.exe_commit(sql)
 
-    tac_name = "%s_%s" % (taca.name, tacb.name)
+    tac_name = "%s_%s" % (taca.name, tacb.name) if tacb_id != 0 else taca.name
 
-    sql = "select id from func_tac_rel where func_id=%d and taca_id=%d and tacb_id=%d" % (func_id, taca_id, tacb_id)
+    sql = ("select id from func_tac_rel where func_id=%d and taca_id=%d and tacb_id=" + \
+            str(tacb_id) if tacb_id != 0 else "null") % taca_id
     _debug_print(sql)
     func_tac_id = db.get_value(sql)
 
-    a_keys, a_values = taca.keys_values
-    b_keys, b_values = tacb.keys_values
-    
     shell = Shell(
         module_flag = module_flag,
         func_flag = func_flag,
         tac_name = tac_name,
         args = {
-            'k': a_keys, 'v': a_values,
-            'x': b_keys, 'y': b_values,
-            't': 1,
+            't':1,
             }
         )
 
@@ -214,14 +227,29 @@ def create(request):
     sql = "insert into func_tac_log(func_tac_id,path,kind) values(%d,'%s',1)" % (func_tac_id, log_path) 
     _debug_print(sql)
     db.exe_commit(sql)
+    # <<<<<<<<<<<<<<<<<<<<<<<
+    a_keys, a_values = taca.keys_values
+
+    args = {
+        'k': a_keys, 'v': a_values,
+    }
+
+    if tacb_id != 0:
+        # generate keys and values
+        b_keys, b_values = tacb.keys_values
+        args.update( {
+            'x': b_keys,
+            'y': b_values,
+            })
+    shell.update_args(args)
 
     res = shell.execute()
-    if res:
-        return HttpResponse('1')
-    else:
+    if not res:
         sql = "update func_tac_rel set status=-1,description='Interface error' where id=%d" % func_tac_id
         _debug_print(sql)
         db.exe_commit(sql)
+        return HttpResponse("0")
+    return HttpResponse('1')
 
 
 def create_schedule(request):
@@ -236,7 +264,7 @@ def create_schedule(request):
             schedule = filetool.read(log_path) + "<br/>",
             tacName = "%s_%s"%(taca_name, tacb_name) if tacb_name != None else taca_name,
             ))
-        return render_to_response("/html/nonmarked/fieldcase/createschedule.html", dic)
+        return render_to_response("/html/nonmarked/googlepr/createschedule.html", dic)
 
     except:
         return HttpResponse("日志文件不存在")
@@ -278,6 +306,8 @@ def delete(request):
         return HttpResponse('1')
     else:
         db.exe_commit("update func_tac_rel set status=-1,description='Interface error' where id=%d" % func_tac_id)
+    return HttpResponse('1')
+
 
 
 

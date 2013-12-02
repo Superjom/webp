@@ -1,0 +1,87 @@
+
+<div class="main_table">
+
+    <table width="100%" border="0" cellspacing="0" class="m_table">
+
+        <thead>
+
+            <tr>
+
+                <th align="center" width="5%">编号</th>
+
+                <th align="center" width="17%">策略A</th>
+
+                <th align="center" width="17%">策略B</th>
+
+                <th align="center" width="17%">创建者</th>
+
+                <th align="center" width="17%">创建时间</th>
+
+                <th align="center" width="10%">状态</th>
+
+                <th align="center" width="17%">操作</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            {% if not list %}
+
+                <tr><td align="center" colspan="11"><font color="red">没有符合条件的记录！</font></td></tr>
+
+            {% endif %}
+
+
+            {% for ft in list %}
+            <tr>
+
+                <td width="5%" align="center">{{ forloop.counter }}</td>
+
+                <td width="17%" align="center">{{ ft.taca_name }}</td>
+
+                <td width="17%" align="center">{{ ft.tacb_name }}</td>
+
+                <td width="17%" align="center">{{ ft.user_name }}</td>
+
+                <td width="17%" align="center">{{ ft.dt }}</td>
+
+                <td width="10%" align="center">
+                    {% if func.purview_has_create %} <a href="#" onclick="anchorstat.createschedule({{ ft.id }})" style="text-decoration:none"> {% endif %} 
+
+                        {% if ft.status_is_1 %}
+
+                            <font color="green">成功</font> 
+                            {% elif ft.status_is_m1 %} <font color="red">失败[{{ ft.description }}</font> 
+                            {% elif ft.status_is_0 %} <font color="green">运行中</font> 
+                        {% endif %} 
+                    {% if func.purview_have_create %} </a> {% endif %}
+                </td>
+                <td width="17%" align="center">
+
+                    {% if func.purview_has_query %} 
+                        {% if not ft.status_is_1 %}  
+                        <a href="#" onclick="fieldcase.show({{ ft.id }})" style="text-decoration:none;color:blue">&nbsp;展示&nbsp;</a> 
+                        {% endif %}
+                    {% endif %}
+
+                    {% if func.purview_has_delete %} 
+                        {% if ft.status_is_0 %}
+                        <a href="#" onclick="fieldcase.del({{ ft.id }})" style="text-decoration:none;color:blue">&nbsp;删除&nbsp;</a> 
+                        {% endif %}
+                    {% endif %}
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+

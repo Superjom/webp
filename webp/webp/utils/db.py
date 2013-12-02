@@ -12,6 +12,10 @@ class DB(object):
     def __init__(self):
         self.cursor = connection.cursor()
 
+    def exe_commit(self, sql):
+        self.execute(sql)
+        self.commit()
+
     def execute(self, cmd):
         self.cursor.execute(cmd)
 

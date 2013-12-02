@@ -17,6 +17,7 @@ from django.shortcuts import render, render_to_response, redirect
 
 from webp.utils.db import DB
 from webp.utils import strtpl, Util, debug_print, _debug_print
+from webp.utils.module.shell import Shell
 import webp.utils.users as user_utils
 from webp.utils.module.anchorstat import AnchorStat as AnchorStatCtrl
 from webp.utils import filetool
@@ -36,7 +37,7 @@ def index(request):
         'purview_has_create': 'create' in func.purview,
         })
 
-    return render_to_response("html/nonmarked/anchorstat/anchorstat_index.html", dic)
+    return render_to_response("html/nonmarked/anchorstat/index.html", dic)
 
 
 def list(request):
@@ -53,7 +54,7 @@ def list(request):
         'list': _list,
         'func': func,
         })
-    return render_to_response("html/nonmarked/anchorstat/anchorstat_list.html", dic)
+    return render_to_response("html/nonmarked/anchorstat/list.html", dic)
 
 
 def show(request):
@@ -127,7 +128,7 @@ def show(request):
     except:
         pass
 
-    return render_to_response("html/nonmarked/anchorstat/anchorstat_show.html", dic)
+    return render_to_response("html/nonmarked/anchorstat/show.html", dic)
 
 
 def createinit(request):
@@ -145,7 +146,7 @@ def createinit(request):
     dic = user_utils.user_info_context(request)
     dic['tacs'] = _list
 
-    return render_to_response("html/nonmarked/anchorstat/anchorstat_create.html", dic)
+    return render_to_response("html/nonmarked/anchorstat/create.html", dic)
 
 
 def create(request):
@@ -159,84 +160,45 @@ def create(request):
 
     count = db.get_value("select count(*) from func_tac_rel where func_id=%d and taca_id=%d" % (func_id, tac_id))
 
-    if count > 0:
-        return HttpResponse("该策略任务已经存在")
+    if count > 0: return HttpResponse("该策略任务已经存在")
 
-    sql = "select id,name,key_1,value_1,key_2,value_2,key_3,value_3,key_4,value_4,key_5,value_5 from tac where id=%d" % tac_id
-    _debug_print(sql)
-    db.execute(sql)
-
-    res = db.fetchone()
-    tac = Tac()
-    if res:
-        (id, name, key_1, value_1, 
-            key_2, value_2, key_3, value_3, 
-            key_4, value_4, key_5, value_5) = res
-
-        for (key, value) in [
-                (key_1, value_1),
-                (key_2, value_2),
-                (key_3, value_3),
-                (key_4, value_4),
-                (key_5, value_5),]:
-            key = key.strip()
-            value = value.strip()
-            if  key or value:
-                tac.map[key] = value
+    tac = Tac.from_db(id=tac_id)
 
     sql = "insert into func_tac_rel(func_id,taca_id,user_id,status) values(%d,%d,%d,0)" % (func_id, tac_id, user.id)
     _debug_print(sql)
-    db.execute(sql)
-    db.commit()
+    db.exe_commit(sql)
 
     sql = "select id from func_tac_rel where tacb_id is null and func_id=%d and taca_id=%d" % (func_id, tac_id)
     _debug_print(sql)
     func_tac_id = db.get_value(sql)
 
-    log_path = os.path.join(Util.INVLINK_HOME, module_flag,
-        func_flag, "log", "%s_%s.log" % (tac.name, Util.get_date() ))
+    a_keys, a_values = tac.keys_values
+    shell = Shell(
+        module_flag = module_flag,
+        func_flag = func_flag,
+        tac_name = tac.name,
+        args = {
+            'k': a_keys, 'v': a_values,
+            't': 1,
+            }
+        )
+
+    log_path = shell.gen_log_path()
 
     sql = "insert into func_tac_log(func_tac_id,path,kind) values(%d,'%s',1)" % (func_tac_id, log_path) 
     _debug_print(sql)
-    db.execute(sql)
-    db.commit()
+    db.exe_commit(sql)
 
-    shell = [
-        os.path.join(Util.INVLINK_HOME,
-            module_flag, "%s.sh" % func_flag),
-        "-e",  Util.INVLINK_HOME,
-        "-m", module_flag,
-        "-f", func_flag,
-        "-n", tac.name, 
-        ]
-    keys = ""
-    values = ""
-
-    for key,value in tac.map.items():
-        keys += key + "|"
-        values += value + "|"
-
-    if keys: keys = keys[:-1] 
-    if values: values = values[:-1]
-
-    shell += ["-k", keys, "-v", values, "-l", log_path, "-t", '1']
-
-
-    try:
-        shell = " ".join(shell)
-        _debug_print('shell '+ shell)
-        output = os.popen(shell).read()
-        _debug_print('output ' + output)
-
-    except Exception, e:
-
-        _debug_print('e: ' + e)
+    res = shell.execute()
+    
+    if res:
+        return HttpResponse('1')
+    else:
         sql = "update func_tac_rel set status=-1,description='Interface error' where id=%d" % func_tac_id
         _debug_print(sql)
-        db.execute(sql)
-        db.commit()
+        db.exe_commit(sql)
 
-    return HttpResponse("1")
+    return HttpResponse("0")
 
 
 def create_schedule(request):
@@ -251,89 +213,43 @@ def create_schedule(request):
             schedule = filetool.read(log_path) + "<br/>",
             tacName = "%s_%s"%(taca_name, tacb_name) if tacb_name != None else taca_name,
             ))
-        return render_to_response("/html/nonmarked/anchorstat/anchorstat_createschedule.html", dic)
+        return render_to_response("/html/nonmarked/anchorstat/createschedule.html", dic)
 
     except:
         return HttpResponse("日志文件不存在")
 
 
 def delete(request):
-    db = DB()
     module_flag = request.GET["module_flag"]
     func_flag = request.GET["func_flag"]
     func_tac_id = int(request.GET["func_tac_id"])
-    db.execute("select id,name,key_1,value_1,key_2,value_2,key_3,value_3,key_4,value_4,key_5,value_5 from tac where id=(select taca_id from func_tac_rel where id=%d)" % func_tac_id)
-    res = db.fetchone()
-    tac = Tac()
+    db = DB()
+    
+    tac = Tac.from_db_by_func_tac_id("taca_id", func_tac_id)
 
-    if res:
-        (id, name, 
-            key_1, value_1,
-            key_2, value_2,
-            key_3, value_3,
-            key_4, value_4,
-            key_5, value_5,) = res
+    Tac.del_func_tac_rel(func_tac_id = func_tac_id)
 
-        tac = Tac( id = id, name = name)
+    a_keys, a_values = tac.keys_values
 
-        for (key, value) in [
-                (key_1, value_1),
-                (key_2, value_2),
-                (key_3, value_3),
-                (key_4, value_4),
-                (key_5, value_5),]:
-
-            if key or value:
-                tac.map[key] = value
-    db.execute("delete from func_tac_rel where id=%d" % func_tac_id)
-    db.commit()
-
-    log_path = os.path.join(
-        Util.INVLINK_HOME, 
-        module_flag,
-        func_flag,
-        "log",
-        "%s_%s.log" % (tac.name, Util.get_date() ),
+    shell = Shell(
+        module_flag = module_flag,
+        func_flag = func_flag,
+        tac_name = tac.name,
+        args = {
+            'k': a_keys, 'v': a_values,
+            't': 2,
+            }
         )
 
-    db.execute("insert into func_tac_log(func_tac_id,path,kind) values(%d,'%s',0)" % (func_tac_id, log_path))
-    db.commit()
+    log_path = shell.gen_log_path()
 
-    shell = [
-        os.path.join(Util.INVLINK_HOME, module_flag, 
-                func_flag, "%s.sh"%func_flag),
-        "-e", Util.INVLINK_HOME,
-        "-m", module_flag,
-        "-f", func_flag,
-        "-n", tac.name,
-        ]
-    keys = ""
-    values = ""
+    db.exe_commit("insert into func_tac_log(func_tac_id,path,kind) values(%d,'%s',0)" % (func_tac_id, log_path))
 
-    for key,value in tac.map.items():
-        keys += key + "|"
-        values += value + "|"
-    if keys: keys = keys[:-1]
-    if values: values = values[:-1]
-
-    shell += [
-        "-k", keys,
-        "-v", values,
-        "-l", log_path,
-        "-t", "2",
-        ]
-    try:
-        shell = ' '.join(shell)
-        output = os.popen(shell).read()
-    except:
-        db.execute("update func_tac_rel set status=-1,description='Interface error' where id=%d" % func_tac_id)
-        db.commit()
-
-    return HttpResponse("1")
-
-
-
-
+    res = shell.execute()
+    if res:
+        return HttpResponse("1")
+    else:
+        db.exe_commit("update func_tac_rel set status=-1,description='Interface error' where id=%d" % func_tac_id)
 
 
 

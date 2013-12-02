@@ -4,6 +4,7 @@ from datetime import datetime as dt
 import pprint as p_print
 from string import Template as strtpl
 import functools
+from webp.settings import DEBUG
 
 def pprint(s):
     pp = p_print.PrettyPrinter(indent=4)
@@ -21,7 +22,6 @@ def debug():
     os.environ['DJANGO_SETTINGS_MODULE'] = 'webp.settings' 
 
 def debug_print(s):
-    from webp.settings import DEBUG
     if(DEBUG):
         print "[.. debug ..]", s
 

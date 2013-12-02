@@ -48,6 +48,5 @@ class Module(object):
         return False
 
 
-
 if __name__ == '__main__':
     Module.get_id('nonmarked')
