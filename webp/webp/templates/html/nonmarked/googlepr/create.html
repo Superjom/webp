@@ -1,0 +1,102 @@
+
+<form name="googleprCreateForm" onsubmit="googlepr.create();return false;">
+
+<div class="main_table">
+
+    <table class="m_table" width="100%" border="0" cellspacing="0">
+
+        <thead>
+
+            <tr>
+
+                <th align="left"><img src="/static/images/sub_func.gif"
+
+                    align="absmiddle" /> <span>创建任务</span></th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr>
+
+                <td>
+
+                    <table bgcolor="#F0F8E2" width="100%" border="0" cellpadding="6"
+
+                        cellspacing="1">
+
+                        <tr>
+
+                            <td width="25%"></td>
+
+                            <td width="20%" align="right">策略A</td>
+
+                            <td width="20%" align="left">
+
+                            {% if not tacs %}
+
+                            <font color="red">当前无策略，请先创建策略！</font>
+
+                            {% endif %}
+
+                            {% for tac in tacs %}
+
+                            <input type="radio" name="taca" value="{{ tac.id }}" type="text" />{{ tac.name }}
+
+                            {% endfor %}
+
+                            </td>
+
+                            <td align="left" id="info_1" style="color: red"></td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td width="25%"></td>
+
+                            <td width="20%" align="right">策略B</td>
+
+                            <td width="20%" align="left">
+
+                            {% if not tacs %}
+
+                            <font color="red">当前无策略，请先创建策略！</font>
+
+                            {% endif %}
+
+                            {% for tac in tacs %}
+
+                            <input type="radio" name="tacb" value="{{ tac.id }}" type="text" />{{ tac.name }}
+
+                            {% endfor %}
+
+                            </td>
+
+                            <td align="left" id="info_2" style="color: red"></td>
+
+                        </tr>
+
+                    </table>
+
+                    <div class="form_control">
+
+                        <input name="submit1" type="submit" class="but_01" value="提交" />
+
+                        <input name="submit2" type="button" onclick="googlepr.list()" class="but_01" value="返回" />
+
+                    </div>
+
+                </td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
+
+</form>

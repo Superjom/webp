@@ -1,0 +1,31 @@
+&nbsp;$!description
+#foreach($se in $data )
+	<div class="main_table">
+	$!se.de
+	<table width="100%" border="0" cellspacing="0" class="m_table">
+		<thead>
+			<tr>
+				#foreach($na in $se.navigation )
+				<th align="center">$!na</th>
+				#end
+			</tr>
+		</thead>
+		<tbody>
+			#if($se.data.size()==0)
+			<tr>
+				<td align="center" colspan="11"><font color="red">没有符合条件的记录！</font></td>
+			</tr>
+			#end
+			#foreach($da in $se.data )
+			<tr>
+				#foreach($d in $da )
+				<td align="center">$!d</td>
+				#end
+			</tr>
+			#end
+		</tbody>
+	</table>
+	$!se.mo
+	</div>
+#end
+&nbsp;$!more
