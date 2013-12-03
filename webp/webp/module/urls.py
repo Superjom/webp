@@ -48,11 +48,11 @@ urlpatterns = patterns('',
 
     url(r'^nonmarked/fieldstat/createinit', 'webp.module.views.nonmarked.fieldstat.createinit', name="fieldstat_createinit"),
 
-    url(r'^nonmarked/fieldstat/create', 'webp.module.views.nonmarked.fieldstat.create', name="fieldstat_create"),
+    url(r'^nonmarked/fieldstat/createschedule', 'webp.module.views.nonmarked.fieldstat.create_schedule', name="fieldstat_create_schedule"),
 
     url(r'^nonmarked/fieldstat/delete', 'webp.module.views.nonmarked.fieldstat.delete', name="fieldstat_delete"),
 
-    url(r'^nonmarked/fieldstat/createschedule', 'webp.module.views.nonmarked.fieldstat.create_schedule', name="fieldstat_create_schedule"),
+    url(r'^nonmarked/fieldstat/create', 'webp.module.views.nonmarked.fieldstat.create', name="fieldstat_create"),
 
     url(r'^nonmarked/fieldstat', 'webp.module.views.nonmarked.fieldstat.index', name="fieldstat_index"),
 

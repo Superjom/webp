@@ -133,7 +133,7 @@ GooglePr.prototype = {
 
         }
 
-        htmlobj=$.ajax({url:baseUrl+"/create?+params+"&ajaxid="+Math.random(),async:false});
+        htmlobj=$.ajax({url:baseUrl+"/create?"+params+"&ajaxid="+Math.random(),async:false});
 
         if (htmlobj.responseText=="1"){
 

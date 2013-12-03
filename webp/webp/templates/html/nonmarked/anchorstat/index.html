@@ -13,7 +13,7 @@
 
 <script charset="utf8" type="text/javascript" src="/static/js/jquery.js"></script>
 
-<script charset="utf8" type="text/javascript" src="/static/js/nonmarked/anchorstat.js"></script>
+<script charset="utf8" type="text/javascript" src="/static/js/nonmarked/func.js"></script>
 
 </head>
 
@@ -21,7 +21,7 @@
 
     <div>
 
-        <img src="/static/images/position.gif" align="absmiddle" /> 当前位置：基于anchor的统计评估
+        <img src="/static/images/position.gif" align="absmiddle" /> 当前位置：{{ func_name }}
 
         <input type="hidden" id="module_flag" value="{{ module_flag }}" />
 
@@ -29,7 +29,7 @@
 
     </div>
 
-    <form name="anchorstatQueryForm" onsubmit="anchorstat.list();return false;">
+    <form name="anchorstatQueryForm" onsubmit="func.list();return false;">
 
     <div align="right">
 
@@ -47,7 +47,7 @@
 
                 {% if  purview_has_create %}
 
-                <input name="submit2" onclick="anchorstat.createinit()" type="button" class="but_01" value="创建" />&nbsp;
+                <input name="submit2" onclick="func.createinit()" type="button" class="but_01" value="创建" />&nbsp;
 
                 {% endif %}
 
@@ -61,7 +61,7 @@
 
     </form>
 
-    <div id="anchorstat_list" align="center">
+    <div id="func_list" align="center">
 
         <div class="main_table">
 
@@ -107,11 +107,11 @@
 
     </div>
 
-    <div id='anchorstat_show'></div>
+    <div id='func_show'></div>
 
-    <div id='anchorstat_create'></div>
+    <div id='func_create'></div>
 
-    <div id='anchorstat_createschedule'></div>
+    <div id='func_createschedule'></div>
 
 </body>
 

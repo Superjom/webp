@@ -151,5 +151,3 @@ SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 # set project's environment
 from webp.utils import Util
 Util.set_environment()
-
-

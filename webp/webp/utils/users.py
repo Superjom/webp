@@ -9,6 +9,7 @@ Created on 11 11, 2013
 
 from webp.utils.objects.User import User as UserObject
 from webp.utils.module import Module
+from webp.utils import _debug_print
 from webp.utils.db import DB
 
 class User(object):
@@ -28,12 +29,10 @@ class User(object):
         sql = "select a.id,a.userid,a.name,a.sex,a.role_id,b.name role_name from user a, role b where a.role_id=b.id and a.userid='%s'" % self.userid
         self.db.execute(sql)
         res = self.db.fetchone()
-        print 'res:', res
         if res:
             o = self.userobject
             o.id, o.userId, o.name, o.roleId = \
                     res[0], res[1], res[2], res[4]
-        #print 'user_info:', self.userobject
 
     def _fill_module(self):
         '''
@@ -45,14 +44,13 @@ class User(object):
         self.db.execute(sql)
         res = self.db.fetchall()
 
-        print 'get res: ', res
 
         for module_id, module_flag, module_name in res:
-            print '@ get module', module_id, module_flag, module_name 
+            _debug_print('@ get module', module_id, module_flag, module_name)
             m = Module(module_id)
             m.fill(module_flag, module_name, roleId)
             module = m.get_object()
-            print '@ modulename len', module_name, len(module.list)
+            _debug_print( '@ modulename len', module_name, len(module.list))
             self.userobject.list.append(module)
 
     def get_object(self):

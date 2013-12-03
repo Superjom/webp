@@ -6,6 +6,7 @@ Created on 11 22, 2013
 @author: Chunwei Yan @ pkusz
 @mail:  yanchunwei@outlook.com
 '''
+from webp.utils import e
 
 class Module(object):
     """

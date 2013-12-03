@@ -21,9 +21,12 @@ def debug():
     sys.path.append(path)
     os.environ['DJANGO_SETTINGS_MODULE'] = 'webp.settings' 
 
-def debug_print(s):
+def debug_print(*args):
     if(DEBUG):
-        print "[.. debug ..]", s
+        print "[.. debug ..]", 
+        for a in args:
+            print a, 
+        print
 
 _debug_print = debug_print
 

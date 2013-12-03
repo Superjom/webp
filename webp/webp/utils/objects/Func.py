@@ -6,6 +6,7 @@ Created on 11 21, 2013
 @author: Chunwei Yan @ pkusz
 @mail:  yanchunwei@outlook.com
 '''
+from webp.utils import e
 
 class Func(object):
 
