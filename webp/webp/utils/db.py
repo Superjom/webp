@@ -7,11 +7,15 @@ Created on 11 21, 2013
 @mail:  yanchunwei@outlook.com
 '''
 import MySQLdb as mysql
+from webp.settings import DATABASES
+
+default_db = DATABASES['default']
 
 connection = mysql.connect(
-    user='root',
-    passwd='root',
-    db='invlink',
+    user=default_db['USER'],
+    passwd=default_db['PASSWORD'],
+    db=default_db['NAME'],
+    host=default_db['HOST'],
     charset='utf8'
     )
 

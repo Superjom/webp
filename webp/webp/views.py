@@ -6,6 +6,10 @@ Created on 11 11, 2013
 @author: Chunwei Yan @ pkusz
 @mail:  yanchunwei@outlook.com
 '''
+import sys
+reload(sys)
+sys.setdefaultencoding('utf8')
+
 from django.core.context_processors import csrf
 from django.shortcuts import render, render_to_response, redirect
 
