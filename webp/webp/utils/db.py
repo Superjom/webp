@@ -31,6 +31,9 @@ class DB(object):
         self.exe_commit("SET NAMES utf8")
         self.exe_commit("set global character_set_database='utf8'")
         self.exe_commit("set global character_set_server='utf8'")
+        self.exe_commit("set global character_set_client='utf8'")
+        self.exe_commit("set global character_set_results='utf8'")
+        self.exe_commit("set global character_set_connection='utf8'")
 
     def exe_commit(self, sql):
         self.execute(sql)
