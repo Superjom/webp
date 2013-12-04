@@ -1,5 +1,10 @@
 # -*- coding: utf-8 -*-
 import os
+import sys
+reload(sys);
+# using exec to set the encoding, to avoid error in IDE.
+exec("sys.setdefaultencoding('utf-8')");
+
 from datetime import datetime as dt
 import pprint as p_print
 from string import Template as strtpl
