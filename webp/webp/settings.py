@@ -55,7 +55,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': "invlink",
         'USER': "root",
-        'PASSWORD': "root",
+        'PASSWORD': "",
         'HOST': 'localhost',
         'PORT': '3306',
     }
@@ -69,8 +69,6 @@ TIME_ZONE = 'Asia/Shanghai'
 DEFAULT_CHARSET = 'utf-8'
 
 FILE_CHARSET = 'utf-8'
-
-LANGUAGE_CODE = 'zh-cn'
 
 USE_I18N = True
 

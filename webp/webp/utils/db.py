@@ -48,10 +48,12 @@ class DB(object):
 
     def fetchone(self):
         res = self.cursor.fetchone()
+        print res
         return res
 
     def fetchall(self):
         res = self.cursor.fetchall()
+        print res
         return res
 
     def get_value(self, sql):
