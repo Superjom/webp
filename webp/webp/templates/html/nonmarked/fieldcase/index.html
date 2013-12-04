@@ -29,7 +29,7 @@
 
     </div>
 
-    <form name="fieldcaseQueryForm" onsubmit="fieldcase.list();return false;">
+    <form name="fieldcaseQueryForm" onsubmit="func.list();return false;">
 
     <div align="right">
 
@@ -47,7 +47,7 @@
 
                 {% if  func.purview_has_create %}
 
-                <input name="submit2" onclick="fieldcase.createinit()" type="button" class="but_01" value="创建" />&nbsp;
+                <input name="submit2" onclick="func.createinit()" type="button" class="but_01" value="创建" />&nbsp;
 
                 {% endif %}
 
@@ -61,7 +61,7 @@
 
     </form>
 
-    <div id="fieldcase_list" align="center">
+    <div id="func_list" align="center">
 
         <div class="main_table">
 
@@ -109,11 +109,11 @@
 
     </div>
 
-    <div id='fieldcase_show'></div>
+    <div id='func_show'></div>
 
-    <div id='fieldcase_create'></div>
+    <div id='func_create'></div>
 
-    <div id='fieldcase_createschedule'></div>
+    <div id='func_createschedule'></div>
 
 </body>
 
