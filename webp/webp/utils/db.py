@@ -11,6 +11,8 @@ from django.db import connection, transaction
 class DB(object):
     def __init__(self):
         self.cursor = connection.cursor()
+        # unity encode
+        self.execute("SET NAMES utf8")
 
     def exe_commit(self, sql):
         self.execute(sql)
