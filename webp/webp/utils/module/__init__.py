@@ -6,8 +6,14 @@ Created on 11 21, 2013
 @author: Chunwei Yan @ pkusz
 @mail:  yanchunwei@outlook.com
 '''
+import sys
+reload(sys);
+# using exec to set the encoding, to avoid error in IDE.
+exec("sys.setdefaultencoding('utf-8')");
+
 from webp.utils.objects.Module import Module as ModuleObject
 from webp.utils.db import DB
+from webp.utils import e
 
 from webp.utils.objects.Func import Func
 
@@ -44,6 +50,9 @@ class Module(object):
         print 'module res:', res
 
         for func_id, func_flag, func_name, purview_flag in res:
+            func_flag = e(func_flag)
+            func_name = e(func_name)
+            purview_flag = e(func_name)
 
             print '@func:', func_id, func_flag, func_name, purview_flag 
             print '@func_ids', func_ids
