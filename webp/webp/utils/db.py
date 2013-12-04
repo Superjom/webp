@@ -6,7 +6,14 @@ Created on 11 21, 2013
 @author: Chunwei Yan @ pkusz
 @mail:  yanchunwei@outlook.com
 '''
-from django.db import connection, transaction
+import MySQLdb as mysql
+
+connection = mysql.connect(
+    user='root',
+    passwd='root',
+    db='invlink',
+    charset='utf8'
+    )
 
 class DB(object):
     def __init__(self):
@@ -22,7 +29,8 @@ class DB(object):
         self.cursor.execute(cmd)
 
     def commit(self):
-        transaction.commit_unless_managed()
+        #transaction.commit_unless_managed()
+        connection.commit()
 
     def fetchone(self):
         res = self.cursor.fetchone()
@@ -43,5 +51,8 @@ class DB(object):
 
 
 if __name__ == "__main__":
-    pass
+    db = DB()
+    db.execute("select * from user")
+    res = db.fetchone()
+    print res
 
