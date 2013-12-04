@@ -40,6 +40,7 @@ def index(request):
         'module_flag': module.flag,
         'func_flag': func.flag,
         'purview_has_create': 'create' in func.purview,
+        'func': func,
         })
 
     return render_to_response("html/nonmarked/googlepr/index.html", dic)

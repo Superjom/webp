@@ -41,6 +41,7 @@ def index(request):
         'func_flag': func.flag,
         'func_name': func.name,
         'purview_has_create': 'create' in func.purview,
+        'func': func,
         })
 
     return render_to_response("html/nonmarked/anchorstat/index.html", dic)
