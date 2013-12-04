@@ -22,8 +22,6 @@ if __name__ == '__main__':
 
 from webp.utils.db import DB
 
-db = DB()
-
 class Module(object):
     @staticmethod
     def get_id(flag):

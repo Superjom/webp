@@ -6,10 +6,14 @@ Created on 11 11, 2013
 @author: Chunwei Yan @ pkusz
 @mail:  yanchunwei@outlook.com
 '''
+import sys
+reload(sys);
+# using exec to set the encoding, to avoid error in IDE.
+exec("sys.setdefaultencoding('utf-8')");
 
 from webp.utils.objects.User import User as UserObject
 from webp.utils.module import Module
-from webp.utils import _debug_print
+from webp.utils import _debug_print, e
 from webp.utils.db import DB
 
 class User(object):
@@ -26,13 +30,13 @@ class User(object):
         self._fill_module()
 
     def _fill_base_info(self):
-        sql = "select a.id,a.userid,a.name,a.sex,a.role_id,b.name role_name from user a, role b where a.role_id=b.id and a.userid='%s'" % self.userid
+        sql = u"select a.id,a.userid,a.name,a.sex,a.role_id,b.name role_name from user a, role b where a.role_id=b.id and a.userid='%s'" % self.userid
         self.db.execute(sql)
         res = self.db.fetchone()
         if res:
             o = self.userobject
             o.id, o.userId, o.name, o.roleId = \
-                    res[0], res[1], res[2], res[4]
+                    res[0], e(res[1]), e(res[2]), res[4]
 
     def _fill_module(self):
         '''
@@ -40,7 +44,7 @@ class User(object):
         user's role
         '''
         roleId = self.userobject.roleId
-        sql = "select a.id module_id,a.flag module_flag,a.name module_name from module a where exists (select * from func b,func_purview_role_rel c where a.id=b.module_id and b.id=c.func_id and c.role_id=%d) order by a.sequence asc,a.id desc" % roleId
+        sql = u"select a.id module_id,a.flag module_flag,a.name module_name from module a where exists (select * from func b,func_purview_role_rel c where a.id=b.module_id and b.id=c.func_id and c.role_id=%d) order by a.sequence asc,a.id desc" % roleId
         self.db.execute(sql)
         res = self.db.fetchall()
 
