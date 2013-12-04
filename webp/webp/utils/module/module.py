@@ -6,6 +6,11 @@ Created on Dec 23, 2013
 @mail:  yanchunwei@outlook.com
 '''
 from __future__ import division
+import sys
+reload(sys);
+# using exec to set the encoding, to avoid error in IDE.
+exec("sys.setdefaultencoding('utf-8')");
+
 
 #----------------- debug -------------
 if __name__ == '__main__':
