@@ -28,7 +28,9 @@ class DB(object):
     def __init__(self):
         self.cursor = connection.cursor()
         # unity encode
-        self.execute("SET NAMES utf8")
+        self.exe_commit("SET NAMES utf8")
+        self.exe_commit("set global character_set_database='utf8'")
+        self.exe_commit("set global character_set_server='utf8'")
 
     def exe_commit(self, sql):
         self.execute(sql)
