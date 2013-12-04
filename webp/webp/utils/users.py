@@ -21,6 +21,11 @@ class User(object):
         self.userid = userid
         self.userobject = UserObject()
         self.db = DB()
+        try:
+            self.userobject.module_id_set
+        except:
+            self.userobject.module_id_set = set()
+
 
     def fill(self):
         '''
@@ -51,13 +56,15 @@ class User(object):
 
         _debug_print("res", res)
 
+        print '----- module  begin ---------------------------------->'
         for module_id, module_flag, module_name in res:
-            _debug_print('@ get module', module_id, module_flag, module_name)
+            print '@@@@@@----> module_id: %d ' % module_id
             m = Module(module_id)
             m.fill(module_flag, module_name, roleId)
             module = m.get_object()
-            _debug_print( '@ modulename len', module_name, len(module.list))
-            self.userobject.list.append(module)
+            self.userobject.module_id_set.add(module_id)
+            self.userobject.list.add(module)
+
 
     def get_object(self):
         return self.userobject
@@ -111,11 +118,11 @@ def logout(request):
     """
     clear session of current user
     """
-    if 'userid' in request.session:
+    try:
         del request.session['userid']
-
-    if 'userobject' in request.session:
         del request.session['userobject']
+    except:
+        pass
 
 
 

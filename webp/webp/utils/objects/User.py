@@ -11,7 +11,7 @@ Created on 11 21, 2013
 class User(object):
 
     def __init__(self, id=-1, userId="", name="",
-                password="", roleId=-1, roleName="", dt="", _list=[]):
+            password="", roleId=-1, roleName="", dt="", _list=set()):
 
         self.id =       id
         self.userId =   userId

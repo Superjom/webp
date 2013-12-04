@@ -29,6 +29,13 @@ class Func(object):
     def purview_has_query(self):
         return 'query' in self.purview
 
+    def __cmp__(self, other):
+        return not self.id == other.id
+
+    def __hash__(self):
+        return hash(self.id)
+
+
 
     def __str__(self):
         return '\n'.join([

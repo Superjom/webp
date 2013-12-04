@@ -17,12 +17,19 @@ class Module(object):
         self.id = id
         self.flag = flag
         self.name = name
-        self.list = []
+        self.list = set()
 
     def get_func(self, flag):
         for f in self.list:
             if f.flag == flag:
                 return f
+
+
+    def __cmp__(self, other):
+        return not self.id == other.id
+
+    def __hash__(self):
+        return hash(self.id)
 
     def __str__(self):
         return '\n'.join([

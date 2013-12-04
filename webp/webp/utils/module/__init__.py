@@ -50,13 +50,9 @@ class Module(object):
         print 'module res:', res
 
         for func_id, func_flag, func_name, purview_flag in res:
-            func_flag = e(func_flag)
-            func_name = e(func_name)
-            purview_flag = e(func_name)
-
-            print '@func:', func_id, func_flag, func_name, purview_flag 
-            print '@func_ids', func_ids
-            print '@module len', len(self.moduleobject.list)
+            func_flag = func_flag
+            func_name = func_name
+            purview_flag = func_name
 
             if func_id in func_ids:
                 last_f.purview.add(purview_flag)
@@ -69,8 +65,7 @@ class Module(object):
                     name = func_name
                 )
                 f.purview.add(purview_flag)
-                self.moduleobject.list.append(f)
-                print 'module append len', len(self.moduleobject.list)
+                self.moduleobject.list.add(f)
                 last_f = f
 
     def __str__(self):
