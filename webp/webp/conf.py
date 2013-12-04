@@ -1,2 +1,2 @@
 # need to change it 
-INVLINK_HOME="/home/chunwei/webp/webp/webp"
+INVLINK_HOME="/home/wdmlink/fanqifeng/workspace/invlink/data"
