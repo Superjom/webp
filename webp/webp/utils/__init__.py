@@ -30,7 +30,7 @@ def debug_print(*args):
     if(DEBUG):
         print "[.. debug ..]", 
         for a in args:
-            print a, 
+            print e(a), 
         print
 
 _debug_print = debug_print
