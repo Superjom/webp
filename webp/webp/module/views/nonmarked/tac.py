@@ -41,7 +41,7 @@ def index(request):
     data = {
         'module_flag': module.flag,
         'func_flag': func.flag,
-        'purview_has_create': 'create' in func.purview,
+        'func': func,
         }
 
     dic.update(data)
