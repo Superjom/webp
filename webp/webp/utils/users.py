@@ -33,6 +33,7 @@ class User(object):
         sql = u"select a.id,a.userid,a.name,a.sex,a.role_id,b.name role_name from user a, role b where a.role_id=b.id and a.userid='%s'" % self.userid
         self.db.execute(sql)
         res = self.db.fetchone()
+        _debug_print("res", res)
         if res:
             o = self.userobject
             o.id, o.userId, o.name, o.roleId = \
