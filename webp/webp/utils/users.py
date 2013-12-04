@@ -49,6 +49,7 @@ class User(object):
         self.db.execute(sql)
         res = self.db.fetchall()
 
+        _debug_print("res", res)
 
         for module_id, module_flag, module_name in res:
             _debug_print('@ get module', module_id, module_flag, module_name)
