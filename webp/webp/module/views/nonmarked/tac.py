@@ -7,6 +7,12 @@ Created on Dec 23, 2013
 '''
 from __future__ import division
 
+import sys
+reload(sys);
+# using exec to set the encoding, to avoid error in IDE.
+exec("sys.setdefaultencoding('utf-8')");
+
+
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.core.context_processors import csrf

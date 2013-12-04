@@ -6,6 +6,11 @@ Created on 11 25, 2013
 @author: Chunwei Yan @ pkusz
 @mail:  yanchunwei@outlook.com
 '''
+import sys
+reload(sys);
+# using exec to set the encoding, to avoid error in IDE.
+exec("sys.setdefaultencoding('utf-8')");
+
 import os
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
