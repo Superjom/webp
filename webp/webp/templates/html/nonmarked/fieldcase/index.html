@@ -13,7 +13,7 @@
 
 <script type="text/javascript" src="/static/js/jquery.js"></script>
 
-<script type="text/javascript" src="/static/js/nonmarked/func.js"></script>
+<script type="text/javascript" src="/static/js/nonmarked/fieldcase.js"></script>
 
 </head>
 
@@ -25,11 +25,11 @@
 
         <input type="hidden" id="module_flag" value="{{ module_flag }}" />
 
-        <input type="hidden" id="func_flag" value="{{ func_flag }}" />
+        <input type="hidden" id="fieldcase_flag" value="{{ fieldcase_flag }}" />
 
     </div>
 
-    <form name="fieldcaseQueryForm" onsubmit="func.list();return false;">
+    <form name="fieldcaseQueryForm" onsubmit="fieldcase.list();return false;">
 
     <div align="right">
 
@@ -45,9 +45,9 @@
 
                 <input name="submit1" type="submit" class="but_01" value="查 询" />&nbsp;
 
-                {% if  func.purview_has_create %}
+                {% if  fieldcase.purview_has_create %}
 
-                <input name="submit2" onclick="func.createinit()" type="button" class="but_01" value="创建" />&nbsp;
+                <input name="submit2" onclick="fieldcase.createinit()" type="button" class="but_01" value="创建" />&nbsp;
 
                 {% endif %}
 
@@ -61,7 +61,7 @@
 
     </form>
 
-    <div id="func_list" align="center">
+    <div id="fieldcase_list" align="center">
 
         <div class="main_table">
 
@@ -109,11 +109,11 @@
 
     </div>
 
-    <div id='func_show'></div>
+    <div id='fieldcase_show'></div>
 
-    <div id='func_create'></div>
+    <div id='fieldcase_create'></div>
 
-    <div id='func_createschedule'></div>
+    <div id='fieldcase_createschedule'></div>
 
 </body>
 
