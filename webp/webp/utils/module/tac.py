@@ -86,10 +86,8 @@ class Tac(object):
                 'key_3', 'value_3', 'key_4', 'value_4',
                 'key_5', 'value_5',) ])
 
-        sql = "insert into tac(module_id,name,description,key_1,value_1,key_2,value_2,key_3,value_3,key_4,value_4,key_5,value_5) values(%d,'%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s')" % keys
-        print 'create sql:', sql
-        db.execute(sql)
-        db.commit()
+        sql = u"insert into tac(module_id,name,description,key_1,value_1,key_2,value_2,key_3,value_3,key_4,value_4,key_5,value_5) values(%d,'%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s')" % keys
+        db.exe_commit(sql)
         return True
 
     @staticmethod
