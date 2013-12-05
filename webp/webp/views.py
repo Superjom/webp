@@ -18,7 +18,8 @@ import webp.utils.users as user_utils
 def index(request):
     user = user_utils.user_info_context(request)
     if not user:
-        return redirect('/login')
+        # default to guest
+        user_utils.guest_login(request)
     return render_to_response("html/index.html", user)
 
 def header(request):
