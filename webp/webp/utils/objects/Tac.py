@@ -12,7 +12,7 @@ from webp.utils.db import DB
 class Tac(object):
     def __init__(self, id=-1, name="", description="", dt="", map={}):
         self.id = id
-        self.name = e(name)
+        self.name = name.strip()
         self.description = e(description)
         self.dt = dt
         self.map = map

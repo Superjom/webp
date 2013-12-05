@@ -75,7 +75,7 @@ class Shell(object):
             self.module_flag,
             self.func_flag,
             "log",
-            "%s_%s.log" % (self.tac_name, Util.get_date() ),
+            "%s_%s.log" % (self.tac_name.strip(), Util.get_date() ),
             )
         return log_path
 

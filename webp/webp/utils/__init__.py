@@ -63,7 +63,7 @@ class Util(object):
     def get_date():
         d = dt.now()
         time = d.strftime("%Y%m%d%H%M%S")
-        return time
+        return time.strip()
 
 
 class DictProperty(object):
