@@ -64,6 +64,9 @@ class Shell(object):
 
         if 't' in self.args:
             shell += ['-t', self.args['t']]
+
+        shell += ['&']
+
         shell = ' '.join([str(cmd) for cmd in shell])
 
         _debug_print('shell: ' + shell)
