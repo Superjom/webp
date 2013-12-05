@@ -19,18 +19,18 @@ class Func(object):
 
     @property
     def purview_has_create(self):
-        return 'create' in self.purview
         return True
+        return 'create' in self.purview
 
     @property
     def purview_has_delete(self):
-        return 'delete' in self.purview
         return True
+        return 'delete' in self.purview
 
     @property
     def purview_has_query(self):
-        return 'query' in self.purview
         return True
+        return 'query' in self.purview
 
     def __cmp__(self, other):
         return not self.id == other.id

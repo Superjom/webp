@@ -49,10 +49,10 @@ class Shell(object):
         if not 'k' in self.args and 'v' in self.args:
             raise Exception("error, shell command have no k/v attributes.")
 
-        shell += ["-k", self.args['k'], "-v", self.args['v'] ]
+        shell += ["-k", repr(self.args['k']), "-v", repr(self.args['v']) ]
 
         if 'x' in self.args and 'y' in self.args:
-            shell += ["-x", self.args['x'], "-y", self.args['y'] ]
+            shell += ["-x", repr(self.args['x']), "-y", repr(self.args['y']) ]
 
         if 't' in self.args:
             shell += ['-t', self.args['t']]
