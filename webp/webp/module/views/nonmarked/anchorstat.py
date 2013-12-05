@@ -215,6 +215,7 @@ def create_schedule(request):
     db.execute("select a.path,c.name taca_name,d.name tacb_name from func_tac_log a join func_tac_rel b on a.func_tac_id=b.id left join tac c on b.taca_id=c.id left join tac d on b.tacb_id=d.id where b.id=%d" % func_tac_id)
     res = db.fetchone()
     if res: log_path, taca_name, tacb_name = res
+    _debug_print("log_path:", log_path)
     dic = user_utils.user_info_context(request)
     try:
         dic.update( dict(
