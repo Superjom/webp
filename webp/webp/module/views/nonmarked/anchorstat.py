@@ -219,7 +219,7 @@ def create_schedule(request):
     dic = user_utils.user_info_context(request)
     try:
         dic.update( dict(
-            schedule = filetool.read(log_path) + "<br/>",
+            schedule = filetool.read(log_path) ,
             tacName = "%s_%s"%(taca_name, tacb_name) if tacb_name != None else taca_name,
             ))
         return render_to_response("html/nonmarked/anchorstat/createschedule.html", dic)
