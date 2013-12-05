@@ -8,14 +8,13 @@ Created on 11 25, 2013
 '''
 
 class ShowEntity(object):
-    def __init__(self, de="", navigation=[], data=[]):
-        self.de = de
-        self.navigation = navigation
-        self.data = data
-
-    def show(self, de, mo, info=[]):
+    def __init__(self, de="", mo="", data=[]):
         self.de = de
         self.mo = mo
+        self.data = data
+        self.show()
+
+    def show(self, info=[]):
         self.navigation = info[0].split("\t")
         for line in info[1:]:
             self.data.append(line.split("\t"))
