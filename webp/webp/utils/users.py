@@ -16,6 +16,11 @@ from webp.utils.module import Module
 from webp.utils import _debug_print, e
 from webp.utils.db import DB
 
+ADMIN_USER_NAME = 'admin'
+ADMIN_PASSWORD = 'admin'
+
+
+
 class User(object):
     def __init__(self, userid):
         self.userid = userid
@@ -112,7 +117,17 @@ def login(request, userid, password):
         request.session['userobject'] = userobject.get_object()
         return True
 
-
+def guest_login(request):
+    '''
+    remove some function from admin
+    '''
+    login(request, ADMIN_USER_NAME, ADMIN_PASSWORD)
+    user = user_info_context(request)
+    # begin to remove role functions from admin
+    for module in user.list:
+        for func in module.list:
+            func.purview = set(['query'])
+    return true
 
 def logout(request):
     """

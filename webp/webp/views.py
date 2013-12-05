@@ -37,6 +37,11 @@ def login(request):
     c.update(csrf(request))
     return render_to_response("login.html", c)
 
+def guest_login(request):
+    c = {}
+    c.update(csrf(request))
+    return render_to_response("login.html", c)
+
 def logout(request):
     user_utils.logout(request)
     return redirect('/login')
