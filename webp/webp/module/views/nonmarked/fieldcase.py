@@ -114,11 +114,13 @@ def show(request):
         _debug_print("more_path: " + more_path)
 
         more = filetool.read(more_path)
-        dic.update(more = more)
+        dic['more'] = more
     except: 
         pass
 
     data = []
+    dic['data'] = data
+
     try:
         k = 1
         while True:

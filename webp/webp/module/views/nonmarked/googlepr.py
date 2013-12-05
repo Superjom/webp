@@ -118,11 +118,12 @@ def show(request):
         _debug_print("more_path: " + more_path)
 
         more = filetool.read(more_path)
-        dic.update(more = more)
+        dic['more'] = more
     except: 
         pass
 
     data = []
+    dic['data'] = data
     try:
         k = 1
         while True:
@@ -263,11 +264,11 @@ def create_schedule(request):
     func_tac_id = int(request.GET["func_tac_id"])
     db.execute("select a.path,c.name taca_name,d.name tacb_name from func_tac_log a join func_tac_rel b on a.func_tac_id=b.id left join tac c on b.taca_id=c.id left join tac d on b.tacb_id=d.id where b.id=%d" % func_tac_id)
     res = db.fetchone()
-    if res: log_path, taca_name, tacb_name = res
+    if res: log_path, taca_name, tacb_name = [p.strip() for p in res]
     dic = user_utils.user_info_context(request)
     try:
         dic.update( dict(
-            schedule = filetool.read(log_path) + "<br/>",
+            schedule = filetool.read(log_path) ,
             tacName = "%s_%s"%(taca_name, tacb_name) if tacb_name != None else taca_name,
             ))
         return render_to_response("/html/nonmarked/googlepr/createschedule.html", dic)
