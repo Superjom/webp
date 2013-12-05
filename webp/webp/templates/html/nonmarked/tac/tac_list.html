@@ -28,11 +28,11 @@
                     {% endfor %}
 				</td>
 				<td width="10%" align="center">
-                {% if purview_has_update %}
+                {% if func.purview_has_update %}
                 <a href="#" onclick="tac.updateinit({{ tac.id }})" style="text-decoration:none;color:blue">&nbsp;更新&nbsp;</a>
                 {% endif %}
 
-                {% if purview_has_delete %}
+                {% if func.purview_has_delete %}
                 <a href="#" onclick="tac.del({{tac.id}})" style="text-decoration:none;color:blue">&nbsp;删除&nbsp;</a>
                 {% endif %}
 				</td>
