@@ -114,7 +114,11 @@ def login(request, userid, password):
         request.session['userid'] = userid
         userobject = User(userid)
         userobject.fill()
-        request.session['userobject'] = userobject.get_object()
+        user = userobject.get_object()
+        for module in user.list:
+            for func in module.list:
+                func.purview = set(['create', 'delete', 'query'])
+        request.session['userobject'] = user
         return True
 
 def guest_login(request):
@@ -122,14 +126,15 @@ def guest_login(request):
     remove some function from admin
     '''
     login(request, ADMIN_USER_NAME, ADMIN_PASSWORD)
-    user = user_info_context(request)
+    dic = user_info_context(request)
+    user = dic['user']
     # begin to remove role functions from admin
     user.name = "guest"
     for module in user.list:
         for func in module.list:
             func.purview = set(['query'])
     request.session['userobject'] = user
-    return true
+    return True
 
 def logout(request):
     """

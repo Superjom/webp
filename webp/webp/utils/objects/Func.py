@@ -7,6 +7,7 @@ Created on 11 21, 2013
 @mail:  yanchunwei@outlook.com
 '''
 from webp.utils import e
+from webp.utils import _debug_print
 
 class Func(object):
 
@@ -19,18 +20,19 @@ class Func(object):
 
     @property
     def purview_has_create(self):
-        return True
+        _debug_print("purview", self.purview)
         return 'create' in self.purview
+        return True
 
     @property
     def purview_has_delete(self):
-        return True
         return 'delete' in self.purview
+        return True
 
     @property
     def purview_has_query(self):
-        return True
         return 'query' in self.purview
+        return True
 
     def __cmp__(self, other):
         return not self.id == other.id
