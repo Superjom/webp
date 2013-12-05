@@ -80,7 +80,7 @@ def show(request):
                 module_flag, func_flag,
                 'display', tac_name, 'description')
 
-        _debug_print("des_path: " + des_path)
+        _debug_print("des_path: ", des_path)
 
         description = filetool.read(des_path)
         dic['description'] = description
@@ -100,6 +100,7 @@ def show(request):
         pass
 
     data = []
+    dic['data'] = data
 
     try:
         k = 1
