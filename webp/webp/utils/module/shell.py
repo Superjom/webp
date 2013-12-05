@@ -42,16 +42,15 @@ class Shell(object):
 
         proc = subprocess.Popen(
             shell,
-            stderr=subprocess.STDOUT,  # merge stdout and stderr
+            stderr=subprocess.PIPE,  # merge stdout and stderr
             stdout=subprocess.PIPE,
             shell=True
             )
+        #stdoutdata, stderrdata = proc.communicate()
 
-        stdoutdata, stderrdata = proc.communicate()
-
-        _debug_print('shell output:', stdoutdata)
-        _debug_print('shell error:', stderrdata)
-        return True, stdoutdata
+        #_debug_print('shell output:', stdoutdata)
+        #_debug_print('shell error:', stderrdata)
+        return True, ""
 
     def gen_command(self):
         shell = [
