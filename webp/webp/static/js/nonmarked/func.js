@@ -39,10 +39,10 @@ Func.prototype = {
         htmlobj=$.ajax({url:baseUrl+"/delete?module_flag="+$("#module_flag").val()+"&func_flag="+$("#func_flag").val()+"&func_tac_id="+func_tac_id+"&ajaxid="+Math.random(),async:false});
         if (htmlobj.responseText=="1"){
             alert("操作成功");
-            func_list();
+            func.list();
         }else if(htmlobj.responseText=="0"){
             alert("操作失败");
-            func_list();
+            func.list();
         }else{
             alert(htmlobj.responseText);
         }
@@ -66,10 +66,10 @@ Func.prototype = {
         htmlobj=$.ajax({url:baseUrl+"/create?module_flag="+$("#module_flag").val()+"&func_flag="+$("#func_flag").val()+"&tac_id="+tac_id+"&ajaxid="+Math.random(),async:false});
         if (htmlobj.responseText=="1"){
             alert("操作成功");
-            func_list();
+            func.list();
         }else if(htmlobj.responseText=="0"){
             alert("操作失败");
-            func_list();
+            func.list();
         }else{
             alert(htmlobj.responseText);
         }
