@@ -2,7 +2,6 @@
 from __future__ import division
 '''
 Created on 11 25, 2013
-
 @author: Chunwei Yan @ pkusz
 @mail:  yanchunwei@outlook.com
 '''
@@ -39,7 +38,7 @@ class Shell(object):
 
     def execute(self):
         shell = self.gen_command()
-        output = os.popen(shell).read()
+        output = os.system(shell).read()
         _debug_print('shell output: ' + output)
         return True, output
 
@@ -64,8 +63,6 @@ class Shell(object):
 
         if 't' in self.args:
             shell += ['-t', self.args['t']]
-
-        shell += ['&']
 
         shell = ' '.join([str(cmd) for cmd in shell])
 
