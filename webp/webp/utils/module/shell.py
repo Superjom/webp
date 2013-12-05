@@ -18,6 +18,7 @@ if __name__ == '__main__':
     from webp.utils import debug; debug()
 #---------------- end  debug -------------
 
+import subprocess
 from webp.utils import Util, _debug_print
 
 
@@ -38,9 +39,19 @@ class Shell(object):
 
     def execute(self):
         shell = self.gen_command()
-        output = os.system(shell).read()
-        _debug_print('shell output: ' + output)
-        return True, output
+
+        proc = subprocess.Popen(
+            shell,
+            stderr=subprocess.STDOUT,  # merge stdout and stderr
+            stdout=subprocess.PIPE,
+            shell=True
+            )
+
+        stdoutdata, stderrdata = proc.communicate()
+
+        _debug_print('shell output:', stdoutdata)
+        _debug_print('shell error:', stderrdata)
+        return True, stdoutdata
 
     def gen_command(self):
         shell = [
