@@ -143,6 +143,8 @@ CACHES = {
     }
 }
 
+DATE_INPUT_FORMATS = ('%d-%m-%Y','%Y-%m-%d')
+
 CACHE_BACKEND = 'memcached://localhost:8081/'
 SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 

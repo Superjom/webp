@@ -218,3 +218,8 @@ div.sdmenu div a:hover {
 	margin:6px;
 	text-align:center
 }
+
+td{
+    text-align: left;
+    font-size:15px;
+}

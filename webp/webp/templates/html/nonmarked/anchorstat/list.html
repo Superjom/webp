@@ -46,7 +46,7 @@
 
                 <td width="20%" align="center">{{ ft.user_name }}</td>
 
-                <td width="20%" align="center">{{ ft.dt }}</td>
+                <td width="20%" align="center">{{ ft.dt|date:"Y年m月d日 H时i分" }}</td>
 
                 <td width="10%" align="center">
                     {% if func.purview_has_create %} <a href="#" onclick="func.createschedule({{ ft.id }})" style="text-decoration:none"> {% endif %} 
