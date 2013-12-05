@@ -1,2 +1,2 @@
 # need to change it 
-INVLINK_HOME="/home/wdmlink/fanqifeng/workspace/invlink/data"
+INVLINK_HOME="/home/wdmlink/chunwei/invlink/data"

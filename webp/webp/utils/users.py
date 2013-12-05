@@ -63,7 +63,7 @@ class User(object):
 
         print '----- module  begin ---------------------------------->'
         for module_id, module_flag, module_name in res:
-            print '@@@@@@----> module_id: %d ' % module_id
+            #print '@@@@@@----> module_id: %d ' % module_id
             m = Module(module_id)
             m.fill(module_flag, module_name, roleId)
             module = m.get_object()
@@ -117,7 +117,7 @@ def login(request, userid, password):
         user = userobject.get_object()
         for module in user.list:
             for func in module.list:
-                func.purview = set(['create', 'delete', 'query'])
+                func.purview = set(['create', 'delete', 'query', 'update',])
         request.session['userobject'] = user
         return True
 

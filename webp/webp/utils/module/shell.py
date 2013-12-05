@@ -6,14 +6,22 @@ Created on 11 25, 2013
 @author: Chunwei Yan @ pkusz
 @mail:  yanchunwei@outlook.com
 '''
+import os
 import sys
 reload(sys);
 # using exec to set the encoding, to avoid error in IDE.
 exec("sys.setdefaultencoding('utf-8')");
 
+#----------------- debug -------------
+if __name__ == '__main__':
+    import sys
+    sys.path.append('/home/chunwei/webp/webp')
+    from webp.utils import debug; debug()
+#---------------- end  debug -------------
 
-import os
 from webp.utils import Util, _debug_print
+
+
 
 class Shell(object):
     def __init__(self, module_flag, func_flag, tac_name, log_path=None,  args={}):
@@ -49,10 +57,10 @@ class Shell(object):
         if not 'k' in self.args and 'v' in self.args:
             raise Exception("error, shell command have no k/v attributes.")
 
-        shell += ["-k", repr(self.args['k']), "-v", repr(self.args['v']) ]
+        shell += ["-k", '"%s"'%self.args['k'], "-v", '"%s"'%self.args['v'] ]
 
         if 'x' in self.args and 'y' in self.args:
-            shell += ["-x", repr(self.args['x']), "-y", repr(self.args['y']) ]
+            shell += ["-x", '"%s"'%(self.args['x']), "-y", '"%s"'%(self.args['y']) ]
 
         if 't' in self.args:
             shell += ['-t', self.args['t']]
@@ -73,5 +81,15 @@ class Shell(object):
 
 
 if __name__ == "__main__":
-    pass
+    shell = Shell(
+        '>module_flag',
+        '>func_flag',
+        '>tac_name',
+        '>log_path',
+        args = {
+            'k': '>k',
+            'v': '>v',
+            }
+        )
+    print shell.gen_command()
 

@@ -63,6 +63,7 @@ def list(request):
         'list': res,
         'purview_has_update': 'update' in func.purview,
         'purview_has_delete': 'delete' in func.purview,
+        'func': func,
         })
     return render_to_response("html/nonmarked/tac/tac_list.html", dic)
 

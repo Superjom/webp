@@ -34,6 +34,11 @@ class Func(object):
         return 'query' in self.purview
         return True
 
+    @property
+    def purview_has_update(self):
+        return 'update' in self.purview
+        return True
+
     def __cmp__(self, other):
         return not self.id == other.id
 
