@@ -130,6 +130,7 @@ def show(request):
                     ))
             except:
                 pass
+
             data.append(
                     ShowEntity(de, mo, info)
                 )
