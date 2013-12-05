@@ -217,12 +217,15 @@ def create_schedule(request):
     if res: log_path, taca_name, tacb_name = res
     _debug_print("log_path:", log_path)
     dic = user_utils.user_info_context(request)
-    dic.update( dict(
-        schedule = filetool.read(log_path) + "<br/>",
-        tacName = "%s_%s"%(taca_name, tacb_name) if tacb_name != None else taca_name,
-        ))
-    return render_to_response("/html/nonmarked/anchorstat/createschedule.html", dic)
+    try:
+        dic.update( dict(
+            schedule = filetool.read(log_path) + "<br/>",
+            tacName = "%s_%s"%(taca_name, tacb_name) if tacb_name != None else taca_name,
+            ))
+        return render_to_response("html/nonmarked/anchorstat/createschedule.html", dic)
 
+    except:
+        return HttpResponse("日志文件不存在")
 
 
 def delete(request):
