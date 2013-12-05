@@ -72,7 +72,7 @@ def show(request):
     func_tac_id = request.GET['func_tac_id']
     sql = strtpl("select c.name from func_tac_rel a,func b,tac c where a.func_id=b.id and a.taca_id=c.id and a.id=$func_tac_id").substitute(func_tac_id = func_tac_id)
     db.execute(sql)
-    tac_name = db.fetchone()[0]
+    tac_name = (db.fetchone()[0]).strip()
 
     try:
         des_path = os.path.join(
@@ -100,6 +100,7 @@ def show(request):
         pass
 
     data = []
+
     try:
         k = 1
         while True:
