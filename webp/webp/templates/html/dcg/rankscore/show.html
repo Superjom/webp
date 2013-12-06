@@ -1,0 +1,64 @@
+
+&nbsp;
+{{ description }}
+
+{% for se in data %}
+
+    <div class="main_table">
+
+        {{ se.de }}
+
+    <table width="100%" border="0" cellspacing="0" class="m_table">
+
+        <thead>
+
+            <tr>
+
+                {% for na in se.navigation %}
+
+                <th align="center">{{ na }}</th>
+
+                {% endfor %}
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            {% if not se.data %}
+
+            <tr>
+
+                <td align="center" colspan="11"><font color="red">没有符合条件的记录！</font></td>
+
+            </tr>
+
+            {% endif %}
+
+            {% for da in se.data %}
+
+            <tr>
+
+                {% for d in da %}
+
+                <td align="center">{{ d }}</td>
+
+                {% endfor %}
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+    {{ se.mo }}
+
+    </div>
+
+    {% endfor %}
+
+    &nbsp;
+    {{ more }}
