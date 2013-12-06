@@ -16,17 +16,17 @@ from webp.settings import DATABASES
 
 default_db = DATABASES['default']
 
-connection = mysql.connect(
-    user=default_db['USER'],
-    passwd=default_db['PASSWORD'],
-    db=default_db['NAME'],
-    host=default_db['HOST'],
-    charset='utf8'
-    )
-
 class DB(object):
     def __init__(self):
-        self.cursor = connection.cursor()
+        self.connection = mysql.connect(
+            user=default_db['USER'],
+            passwd=default_db['PASSWORD'],
+            db=default_db['NAME'],
+            host=default_db['HOST'],
+            charset='utf8'
+            )
+
+        self.cursor = self.connection.cursor()
         # unity encode
         self.exe_commit("SET NAMES utf8")
         self.exe_commit("set global character_set_database='utf8'")
@@ -44,7 +44,7 @@ class DB(object):
 
     def commit(self):
         #transaction.commit_unless_managed()
-        connection.commit()
+        self.connection.commit()
 
     def fetchone(self):
         res = self.cursor.fetchone()
@@ -64,6 +64,7 @@ class DB(object):
 
     def __del__(self):
         self.cursor.close()
+        self.connection.close()
 
 
 if __name__ == "__main__":
