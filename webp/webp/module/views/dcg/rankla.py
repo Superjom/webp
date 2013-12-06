@@ -75,70 +75,15 @@ def show(request):
     tac_name = (db.fetchone()[0]).strip()
 
     try:
-        des_path = os.path.join(
+        path = os.path.join(
                 Util.INVLINK_HOME,
                 module_flag, func_flag,
-                'display', tac_name, 'description')
+                'display', tac_name, 'info')
+        _debug_print("des_path: ", path)
+        return render_to_response("html/dcg/rankla/show.html", dic)
 
-        _debug_print("des_path: ", des_path)
-
-        description = filetool.read(des_path)
-        dic['description'] = description
     except:
-        pass
-
-    try:
-        more_path = os.path.join(
-                Util.INVLINK_HOME, module_flag,
-                func_flag, 'display', tac_name, 'more')
-
-        _debug_print("more_path: " + more_path)
-
-        more = filetool.read(more_path)
-        dic['more'] = more
-    except: 
-        pass
-
-    data = []
-    dic['data'] = data
-
-    try:
-        k = 1
-        while True:
-            info = []
-            info = filetool.readlines(
-                os.path.join(
-                    Util.INVLINK_HOME,
-                    module_flag, func_flag,
-                    'display', tac_name,
-                    'info_%d' % k))
-            try:
-                de = filetool.read( os.path.join(
-                        Util.INVLINK_HOME, module_flag,
-                        func_flag, 'display', tac_name,
-                            'description_%d' % k
-                    ))
-            except:
-                pass
-
-            try:
-                mo = filetool.read(os.path.join(
-                    Util.INVLINK_HOME,
-                    module_flag, func_flag,
-                    'display', tac_name,
-                    'more_%d' % k
-                    ))
-            except:
-                pass
-
-            data.append(
-                    ShowEntity(de, mo, info)
-                )
-            k += 1
-    except:
-        pass
-
-    return render_to_response("html/dcg/rankla/show.html", dic)
+        return HttpResponse("file does not exist!")
 
 
 def createinit(request):
