@@ -1,34 +1,89 @@
 <div class="main_table">
-	<table width="100%" border="0" cellspacing="0" class="m_table">
-		<thead>
-			<tr>
-				<th align="center" width="10%">±àºÅ</th>
-				<th align="center" width="20%">²ßÂÔ</th>
-				<th align="center" width="20%">´´½¨Õß</th>
-				<th align="center" width="20%">´´½¨Ê±¼ä</th>
-				<th align="center" width="10%">×´Ì¬</th>
-				<th align="center" width="20%">²Ù×÷</th>
-			</tr>
-		</thead>
-		<tbody>
-			#if($list.size()==0)
-				<tr><td align="center" colspan="11"><font color="red">Ã»ÓĞ·ûºÏÌõ¼şµÄ¼ÇÂ¼£¡</font></td></tr>
-			#end
-			#set($no=0)
-			#foreach($ft in $list )
-			#set($no=$no+1)
-			<tr>
-				<td width="10%" align="center">$no</td>
-				<td width="20%" align="center">$!ft.tacaName</td>
-				<td width="20%" align="center">$!ft.userName</td>
-				<td width="20%" align="center">$!ft.dt</td>
-				<td width="10%" align="center">#if($purview.get("create")) <a href="#" onclick="pp.createschedule($ft.id)" style="text-decoration:none"> #end #if($!ft.status==1) <font color="green">³É¹¦</font> #elseif($!ft.status==-1) <font color="red">Ê§°Ü[$!ft.description]</font> #elseif($!ft.status==0) <font color="green">ÔËĞĞÖĞ</font> #end #if($isCreate) </a> #end</td>
-				<td width="20%" align="center">
-				#if($purview.get("query") && $!ft.status==1) <a href="#" onclick="pp.show($ft.id)" style="text-decoration:none;color:blue">&nbsp;Õ¹Ê¾&nbsp;</a> #end
-				#if($purview.get("delete") && $!ft.status!=0) <a href="#" onclick="pp.del($ft.id)" style="text-decoration:none;color:blue">&nbsp;É¾³ı&nbsp;</a> #end
-				</td>
-			</tr>
-			#end
-		</tbody>
-	</table>
+
+    <table width="100%" border="0" cellspacing="0" class="m_table">
+
+        <thead>
+
+            <tr>
+
+                <th align="center" width="10%">ç¼–å·</th>
+
+                <th align="center" width="20%">ç­–ç•¥</th>
+
+                <th align="center" width="20%">åˆ›å»ºè€…</th>
+
+                <th align="center" width="20%">åˆ›å»ºæ—¶é—´</th>
+
+                <th align="center" width="10%">çŠ¶æ€</th>
+
+                <th align="center" width="20%">æ“ä½œ</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            {% if not list %}
+
+                <tr><td align="center" colspan="11"><font color="red">æ²¡æœ‰ç¬¦åˆæ¡ä»¶çš„è®°å½•ï¼</font></td></tr>
+
+            {% endif %}
+
+            {% for ft in list %}
+
+            <!--
+            <p>ft: {{ft}}</p>
+            <p>purview: {{func.purview}} </p>
+            <p>func: {{func.purview_has_query}} </p>
+            -->
+
+            <tr>
+
+                <td width="10%" align="center">{{ forloop.counter }}</td>
+
+                <td width="20%" align="center">{{ ft.taca_name }}</td>
+
+                <td width="20%" align="center">{{ ft.user_name }}</td>
+
+                <td width="20%" align="center">{{ ft.dt }}</td>
+
+                <td width="10%" align="center">
+                    {% if func.purview_has_create %} <a href="#" onclick="pp.createschedule({{ ft.id }})" style="text-decoration:none"> {% endif %} 
+
+                        {% if ft.status_is_1 %}
+
+                            <font color="green">æˆåŠŸ</font> 
+                            {% elif ft.status_is_m1 %} <font color="red">å¤±è´¥[{{ ft.description }}</font> 
+                            {% elif ft.status_is_0 %} <font color="green">è¿è¡Œä¸­</font> 
+                        {% endif %} 
+                    {% if func.purview_have_create %} </a> {% endif %}
+                </td>
+
+                <td width="20%" align="center">
+
+                    {% if func.purview_has_query %} 
+                        {% if not ft.status_is_1 %}  
+                        <a href="#" onclick="pp.show({{ ft.id }})" style="text-decoration:none;color:blue">&nbsp;å±•ç¤º&nbsp;</a> 
+                        {% endif %}
+                    {% endif %}
+
+                    {% if func.purview_has_delete %} 
+                        {% if ft.status_is_0 %}
+                        <a href="#" onclick="pp.del({{ ft.id }})" style="text-decoration:none;color:blue">&nbsp;åˆ é™¤&nbsp;</a> 
+                        {% endif %}
+                    {% endif %}
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
 </div>
+
+

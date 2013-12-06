@@ -6,6 +6,11 @@ Created on 11 25, 2013
 @author: Chunwei Yan @ pkusz
 @mail:  yanchunwei@outlook.com
 '''
+import sys
+reload(sys);
+# using exec to set the encoding, to avoid error in IDE.
+exec("sys.setdefaultencoding('utf-8')");
+
 import os
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
@@ -36,9 +41,10 @@ def index(request):
         'func_flag': func.flag,
         'func_name': func.name,
         'purview_has_create': 'create' in func.purview,
+        'func': func,
         })
 
-    return render_to_response("html/nonmarked/anchorstat/index.html", dic)
+    return render_to_response("html/nonmarked/fieldstat/index.html", dic)
 
 
 def list(request):
@@ -55,7 +61,7 @@ def list(request):
         'list': _list,
         'func': func,
         })
-    return render_to_response("html/nonmarked/anchorstat/list.html", dic)
+    return render_to_response("html/nonmarked/fieldstat/list.html", dic)
 
 
 def show(request):
@@ -66,7 +72,7 @@ def show(request):
     func_tac_id = request.GET['func_tac_id']
     sql = strtpl("select c.name from func_tac_rel a,func b,tac c where a.func_id=b.id and a.taca_id=c.id and a.id=$func_tac_id").substitute(func_tac_id = func_tac_id)
     db.execute(sql)
-    tac_name = db.fetchone()[0]
+    tac_name = (db.fetchone()[0]).strip()
 
     try:
         des_path = os.path.join(
@@ -74,7 +80,7 @@ def show(request):
                 module_flag, func_flag,
                 'display', tac_name, 'description')
 
-        _debug_print("des_path: " + des_path)
+        _debug_print("des_path: ", des_path)
 
         description = filetool.read(des_path)
         dic['description'] = description
@@ -94,6 +100,8 @@ def show(request):
         pass
 
     data = []
+    dic['data'] = data
+
     try:
         k = 1
         while True:
@@ -122,6 +130,7 @@ def show(request):
                     ))
             except:
                 pass
+
             data.append(
                     ShowEntity(de, mo, info)
                 )
@@ -129,7 +138,7 @@ def show(request):
     except:
         pass
 
-    return render_to_response("html/nonmarked/anchorstat/show.html", dic)
+    return render_to_response("html/nonmarked/fieldstat/show.html", dic)
 
 
 def createinit(request):
@@ -147,7 +156,7 @@ def createinit(request):
     dic = user_utils.user_info_context(request)
     dic['tacs'] = _list
 
-    return render_to_response("html/nonmarked/anchorstat/create.html", dic)
+    return render_to_response("html/nonmarked/fieldstat/create.html", dic)
 
 
 def create(request):
@@ -174,6 +183,7 @@ def create(request):
     func_tac_id = db.get_value(sql)
 
     a_keys, a_values = tac.keys_values
+
     shell = Shell(
         module_flag = module_flag,
         func_flag = func_flag,
@@ -208,13 +218,14 @@ def create_schedule(request):
     db.execute("select a.path,c.name taca_name,d.name tacb_name from func_tac_log a join func_tac_rel b on a.func_tac_id=b.id left join tac c on b.taca_id=c.id left join tac d on b.tacb_id=d.id where b.id=%d" % func_tac_id)
     res = db.fetchone()
     if res: log_path, taca_name, tacb_name = res
+    _debug_print("log_path:", log_path)
     dic = user_utils.user_info_context(request)
     try:
         dic.update( dict(
-            schedule = filetool.read(log_path) + "<br/>",
+            schedule = filetool.read(log_path) ,
             tacName = "%s_%s"%(taca_name, tacb_name) if tacb_name != None else taca_name,
             ))
-        return render_to_response("/html/nonmarked/anchorstat/createschedule.html", dic)
+        return render_to_response("html/nonmarked/fieldstat/createschedule.html", dic)
 
     except:
         return HttpResponse("日志文件不存在")
