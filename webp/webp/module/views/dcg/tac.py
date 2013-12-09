@@ -35,8 +35,8 @@ def index(request):
     if not dic: return redirect('/login')
     user = dic['user']
 
-    module = user.get_module('nonmarked')
-    func = module.get_func('nonmarkedtac')
+    module = user.get_module('dcg')
+    func = module.get_func('dcgtac')
 
     data = {
         'module_flag': module.flag,
@@ -45,33 +45,33 @@ def index(request):
         }
 
     dic.update(data)
-    return render_to_response("html/nonmarked/tac/tac_index.html", dic)
+    return render_to_response("html/dcg/tac/tac_index.html", dic)
 
 
 def list(request):
     tac_name = request.GET.get('tagname', '')
-    module_id = ModuleCtrl.get_id(flag='nonmarked')
+    module_id = ModuleCtrl.get_id(flag='dcg')
     res = TacCtrl.search(
             tac_id=-1,
             module_id=module_id, 
             tac_name=tac_name)
     dic = user_utils.user_info_context(request)
     user = dic['user']
-    module = user.get_module('nonmarked')
-    func = module.get_func('nonmarkedtac')
+    module = user.get_module('dcg')
+    func = module.get_func('dcgtac')
     dic.update({
         'list': res,
         'purview_has_update': 'update' in func.purview,
         'purview_has_delete': 'delete' in func.purview,
         'func': func,
         })
-    return render_to_response("html/nonmarked/tac/tac_list.html", dic)
+    return render_to_response("html/dcg/tac/tac_list.html", dic)
 
 
 def createinit(request):
     db = DB()
     dic = user_utils.user_info_context(request)
-    module_flag = 'nonmarked'
+    module_flag = 'dcg'
     module_id = ModuleCtrl.get_id(module_flag)
     db.execute("select key_1, key_2, key_3, key_4, key_5 from tac where module_id=%d order by dt desc limit 0,1" % module_id)
     res = db.fetchall()
@@ -86,7 +86,7 @@ def createinit(request):
     dic.update({
         'keylist': keylist,
         })
-    return render_to_response("html/nonmarked/tac/tac_create.html", dic)
+    return render_to_response("html/dcg/tac/tac_create.html", dic)
 
 
 def create(request):
@@ -128,7 +128,7 @@ def updateinit(request):
     dic.update(
         {'tac': tac}
     )
-    return render_to_response("html/nonmarked/tac/tac_update.html", dic)
+    return render_to_response("html/dcg/tac/tac_update.html", dic)
 
 def update(request):
     tac_id = int(request.GET['tac_id'])

@@ -135,8 +135,104 @@ urlpatterns = patterns('',
     url(r'^nonmarked/googlepr/create', 'webp.module.views.nonmarked.googlepr.create', name="googlepr_create"),
 
     url(r'^nonmarked/googlepr$', 'webp.module.views.nonmarked.googlepr.index', name="googlepr_index"),
-)
 
+    ####################################### marked ########################################
+    # ------------------------------------ tac ------------------------------------------------
+    url(r'^marked/markedtac$', 'webp.module.views.marked.tac.index', name="tac_index"),
+    url(r'^marked/tac/list$', 'webp.module.views.marked.tac.list', name="tac_list"),
+    # create
+    url(r'^marked/tac/createinit$', 'webp.module.views.marked.tac.createinit', name="tac_createinit"),
+
+    url(r'^marked/tac/create', 'webp.module.views.marked.tac.create', name="tac_create"),
+    # del
+    url(r'^marked/tac/del', 'webp.module.views.marked.tac.delete', name="tac_del"),
+    
+    # update
+    url(r'^marked/tac/updateinit', 'webp.module.views.marked.tac.updateinit', name="tac_updateinit"),
+
+    url(r'^marked/tac/update', 'webp.module.views.marked.tac.update', name="tac_update"),
+
+    # ------------------------------------ spam ------------------------------------------------
+
+    url(r'^marked/spam/list?.*', 'webp.module.views.marked.spam.list', name="spam_list"),
+
+    url(r'^marked/spam/show?.*', 'webp.module.views.marked.spam.show', name="spam_show"),
+
+    url(r'^marked/spam/createinit?.*', 'webp.module.views.marked.spam.createinit', name="spam_createinit"),
+
+    url(r'^marked/spam/delete?.*', 'webp.module.views.marked.spam.delete', name="spam_delete"),
+
+    url(r'^marked/spam/createschedule?.*', 'webp.module.views.marked.spam.create_schedule', name="spam_create_schedule"),
+
+    url(r'^marked/spam/create?.*', 'webp.module.views.marked.spam.create', name="spam_create"),
+
+    url(r'^marked/spam?.*', 'webp.module.views.marked.spam.index', name="spam_index"),
+
+    # ------------------------------------ quality ------------------------------------------------
+
+    url(r'^marked/quality/list?.*', 'webp.module.views.marked.quality.list', name="quality_list"),
+
+    url(r'^marked/quality/show?.*', 'webp.module.views.marked.quality.show', name="quality_show"),
+
+    url(r'^marked/quality/createinit?.*', 'webp.module.views.marked.quality.createinit', name="quality_createinit"),
+
+    url(r'^marked/quality/delete?.*', 'webp.module.views.marked.quality.delete', name="quality_delete"),
+
+    url(r'^marked/quality/createschedule?.*', 'webp.module.views.marked.quality.create_schedule', name="quality_create_schedule"),
+
+    url(r'^marked/quality/create?.*', 'webp.module.views.marked.quality.create', name="quality_create"),
+
+    url(r'^marked/quality?.*', 'webp.module.views.marked.quality.index', name="quality_index"),
+
+    ###################################### dcg #################################################
+    # ------------------------------------ tac ------------------------------------------------
+    url(r'^dcg/dcgtac$', 'webp.module.views.dcg.tac.index', name="tac_index"),
+    url(r'^dcg/tac/list$', 'webp.module.views.dcg.tac.list', name="tac_list"),
+    # create
+    url(r'^dcg/tac/createinit$', 'webp.module.views.dcg.tac.createinit', name="tac_createinit"),
+
+    url(r'^dcg/tac/create', 'webp.module.views.dcg.tac.create', name="tac_create"),
+    # del
+    url(r'^dcg/tac/del', 'webp.module.views.dcg.tac.delete', name="tac_del"),
+    
+    # update
+    url(r'^dcg/tac/updateinit', 'webp.module.views.dcg.tac.updateinit', name="tac_updateinit"),
+
+    url(r'^dcg/tac/update', 'webp.module.views.dcg.tac.update', name="tac_update"),
+
+    # ------------------------------------ rankla ------------------------------------------------
+
+    url(r'^dcg/rankla/list?.*', 'webp.module.views.dcg.rankla.list', name="rankla_list"),
+
+    url(r'^dcg/rankla/show?.*', 'webp.module.views.dcg.rankla.show', name="rankla_show"),
+
+    url(r'^dcg/rankla/createinit?.*', 'webp.module.views.dcg.rankla.createinit', name="rankla_createinit"),
+
+    url(r'^dcg/rankla/delete?.*', 'webp.module.views.dcg.rankla.delete', name="rankla_delete"),
+
+    url(r'^dcg/rankla/createschedule?.*', 'webp.module.views.dcg.rankla.create_schedule', name="rankla_create_schedule"),
+
+    url(r'^dcg/rankla/create?.*', 'webp.module.views.dcg.rankla.create', name="rankla_create"),
+
+    url(r'^dcg/rankla?.*', 'webp.module.views.dcg.rankla.index', name="rankla_index"),
+
+    # ------------------------------------ rankscore ------------------------------------------------
+
+    url(r'^dcg/rankscore/list?.*', 'webp.module.views.dcg.rankscore.list', name="rankscore_list"),
+
+    url(r'^dcg/rankscore/show?.*', 'webp.module.views.dcg.rankscore.show', name="rankscore_show"),
+
+    url(r'^dcg/rankscore/createinit?.*', 'webp.module.views.dcg.rankscore.createinit', name="rankscore_createinit"),
+
+    url(r'^dcg/rankscore/delete?.*', 'webp.module.views.dcg.rankscore.delete', name="rankscore_delete"),
+
+    url(r'^dcg/rankscore/createschedule?.*', 'webp.module.views.dcg.rankscore.create_schedule', name="rankscore_create_schedule"),
+
+    url(r'^dcg/rankscore/create?.*', 'webp.module.views.dcg.rankscore.create', name="rankscore_create"),
+
+    url(r'^dcg/rankscore?.*', 'webp.module.views.dcg.rankscore.index', name="rankscore_index"),
+
+)
 
 
 
